@@ -30,8 +30,8 @@ public class EnemyShip : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate () {
 	    // Move towards target position
-	    speed = Mathf.Clamp(speed + maxAcceleration * Time.deltaTime, -maxSpeed, maxSpeed);
-	    transform.position = Vector3.MoveTowards(transform.position, endPoint, speed * Time.deltaTime);
+	    speed = Mathf.Clamp(speed + maxAcceleration * Time.fixedDeltaTime, -maxSpeed, maxSpeed);
+	    transform.position = Vector3.MoveTowards(transform.position, endPoint, speed * Time.fixedDeltaTime);
 
 	    // Change direction if necessary
 	    if (Vector3.Distance(transform.position, endPoint) < 0.3f)

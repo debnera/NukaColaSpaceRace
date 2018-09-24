@@ -35,12 +35,9 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collision!");
         if (collisionParticleSystem != null)
         {
             ParticleSystem pSystem = Instantiate(collisionParticleSystem, transform.position, transform.rotation);
-            Destroy(pSystem, 2.0f);
-
             pSystem.Play();
         }
         Destroy(gameObject);
