@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyShip : MonoBehaviour
 {
     public float maxSpeed = 1.0f;
-    public float maxAcceleration;
+    public float maxAcceleration = 0.1f;
     public float rateOfFire = 1.0f;
     public float degreesBetweenShots = 30.0f;
     public Rigidbody projectilePrefab;
@@ -16,8 +16,7 @@ public class EnemyShip : MonoBehaviour
 
     private float shootingAngle;
     private float previousShotTime;
-    private float startTime;
-    private float movementLength;
+    private float speed;
 
 	// Use this for initialization
 	void Start ()
@@ -25,22 +24,19 @@ public class EnemyShip : MonoBehaviour
 	    startPoint = transform.position;
 	    endPoint = movementEndPoint.transform.position;
 	    movementEndPoint.SetActive(false);
-        startTime = Time.time;
 	    previousShotTime = Time.time;
-        movementLength = Vector3.Distance(startPoint, endPoint);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 	    // Move towards target position
-	    var distanceTraveled = (Time.time - startTime) * maxSpeed;
-	    var fraction = distanceTraveled / movementLength;
-	    transform.position = Vector3.Lerp(startPoint, endPoint, fraction);
+	    speed = Mathf.Clamp(speed + maxAcceleration * Time.deltaTime, -maxSpeed, maxSpeed);
+	    transform.position = Vector3.MoveTowards(transform.position, endPoint, speed * Time.deltaTime);
 
 	    // Change direction if necessary
-	    if (fraction >= 1.0f)
+	    if (Vector3.Distance(transform.position, endPoint) < 0.3f)
 	    {
-	        startTime = Time.time;
+	        speed = -speed;
 	        var temp = startPoint;
 	        startPoint = endPoint;
 	        endPoint = temp;
@@ -50,7 +46,7 @@ public class EnemyShip : MonoBehaviour
 	    if (Time.time - previousShotTime > (1 / rateOfFire))
 	    {
 	        previousShotTime = Time.time;
-            Rigidbody projectile = (Rigidbody)Instantiate(projectilePrefab, transform.position, Quaternion.Euler(0, 0, shootingAngle));
+            Rigidbody projectile = Instantiate(projectilePrefab, transform.position, Quaternion.Euler(0, 0, shootingAngle));
 	        projectile.GetComponent<Projectile>().SetToIgnoreEnemyCollisions();  // Enemies cannot kill enemies
 	        shootingAngle += degreesBetweenShots;
         }
