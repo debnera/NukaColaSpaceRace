@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
 
     public float speed = 10f;
     public float maxSecondsAlive = 10f;
+    public ParticleSystem collisionParticleSystem;
 
 	// Use this for initialization
 	void Start ()
@@ -14,6 +15,10 @@ public class Projectile : MonoBehaviour
         // Set initial velocity
 	    GetComponent<Rigidbody>().velocity = speed * transform.right;
 	    Destroy(gameObject, maxSecondsAlive);
+	    if (collisionParticleSystem != null)
+	    {
+	        collisionParticleSystem.Stop();
+	    }
     }
 
     public void SetToIgnorePlayerCollisions()
@@ -31,6 +36,14 @@ public class Projectile : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Collision!");
+        if (collisionParticleSystem != null)
+        {
+            ParticleSystem pSystem = Instantiate(collisionParticleSystem, transform.position, transform.rotation);
+            Destroy(pSystem, 2.0f);
+
+            pSystem.Play();
+        }
         Destroy(gameObject);
+
     }
 }
