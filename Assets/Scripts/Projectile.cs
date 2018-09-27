@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-
     public float speed = 10f;
     public float maxSecondsAlive = 10f;
     public ParticleSystem collisionParticleSystem;
 
 	// Use this for initialization
-	void Start ()
+	void Start ( )
 	{
         // Set initial velocity
-	    GetComponent<Rigidbody>().velocity = speed * transform.right;
+        GetComponent<Rigidbody>().velocity = speed * transform.up;
 	    Destroy(gameObject, maxSecondsAlive);
 	    if (collisionParticleSystem != null)
 	    {
@@ -41,6 +40,5 @@ public class Projectile : MonoBehaviour
             pSystem.Play();
         }
         Destroy(gameObject);
-
     }
 }

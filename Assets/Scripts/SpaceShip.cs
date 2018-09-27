@@ -9,19 +9,25 @@ public class SpaceShip : MonoBehaviour {
     public float RotationSpeed = 4.0f;
     public float Force = 40.0f;
     private Rigidbody rigidBody;
+    public Rigidbody projectilePrefab;
+    public float projectileSpeed = 100;
+
+    [SerializeField] GameObject cannon;
 
     Vector3 eulerAngleVelocity;
-    Collider objectCollider;
     Vector3 initialPosition;
     Quaternion initialRotation;
+
+    private float previousShotTime;
+    public float rateOfFire = 1.0f;
 
     // Use this for initialization
     void Start ( ) {
         rigidBody = GetComponent<Rigidbody>( );
         eulerAngleVelocity = new Vector3( 0, RotationSpeed, 0 );
-        objectCollider = GetComponent<Collider>( );
         initialPosition = transform.position;
         initialRotation = transform.rotation;
+        previousShotTime = Time.time;
     }
 
     void ResetPosition( ) {
@@ -33,6 +39,8 @@ public class SpaceShip : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate ( ) {
+        //update camera position
+        //mainCamera.transform.position.Set(transform.position.x, transform.position.y, mainCamera.transform.position.z);
 
         // Throttle
         if ( Input.GetKey(KeyCode.Space) )
@@ -44,20 +52,26 @@ public class SpaceShip : MonoBehaviour {
         if ( Input.GetKey( KeyCode.RightArrow ) )
             TurnRight( );
 
-        //if ( Input.GetKey( KeyCode.UpArrow ) )
-        //    Fire( );
-
+        if (Input.GetKey(KeyCode.UpArrow))
+            Fire();
     }
 
     private void OnCollisionEnter(Collision other)
     {
         ResetPosition( );
-        Debug.Log("entered");
+        Debug.Log( "entered" );
     }
 
     private void Fire( )
     {
-        throw new NotImplementedException( );
+        // Handle shooting
+        if (Time.time - previousShotTime > (1 / rateOfFire))
+        {
+            previousShotTime = Time.time;
+            Rigidbody projectile = Instantiate(projectilePrefab, cannon.transform.position, cannon.transform.rotation );
+            projectile.GetComponent<Projectile>( ).SetToIgnorePlayerCollisions();
+            //projectile.GetComponent<Projectile>().SetVelocity( projectileSpeed * cannon.transform.forward);
+        }
     }
 
     private void TurnRight( )
