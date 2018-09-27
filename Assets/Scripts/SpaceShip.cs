@@ -6,13 +6,17 @@ using UnityEngine;
 public class SpaceShip : MonoBehaviour {
 
     public GameObject ship;
-    public float RotationSpeed = 4.0f;
-    public float Force = 40.0f;
+    public float RotationSpeed = 100.0f;
+    public float Force = 2000.0f;
     private Rigidbody rigidBody;
     public Rigidbody projectilePrefab;
     public float projectileSpeed = 100;
 
+    public float MaxLandingAngle = 10.0f;
+    public float MaxLandingSpeed = 3.0f;
+
     [SerializeField] GameObject cannon;
+    [SerializeField] ParticleSystem EngineEffect;
 
     Vector3 eulerAngleVelocity;
     Vector3 initialPosition;
@@ -21,10 +25,12 @@ public class SpaceShip : MonoBehaviour {
     private float previousShotTime;
     public float rateOfFire = 1.0f;
 
+    public bool IsLanded = true;
+
     // Use this for initialization
     void Start ( ) {
         rigidBody = GetComponent<Rigidbody>( );
-        eulerAngleVelocity = new Vector3( 0, RotationSpeed, 0 );
+        eulerAngleVelocity = new Vector3( 0, 0, RotationSpeed);
         initialPosition = transform.position;
         initialRotation = transform.rotation;
         previousShotTime = Time.time;
@@ -33,8 +39,8 @@ public class SpaceShip : MonoBehaviour {
     void ResetPosition( ) {
         transform.position = initialPosition;
         transform.rotation = initialRotation;
-        rigidBody.angularVelocity = new Vector3();
-        rigidBody.velocity = new Vector3();
+        rigidBody.angularVelocity = new Vector3( );
+        rigidBody.velocity = new Vector3( );
     }
 
 	// Update is called once per frame
@@ -43,8 +49,11 @@ public class SpaceShip : MonoBehaviour {
         //mainCamera.transform.position.Set(transform.position.x, transform.position.y, mainCamera.transform.position.z);
 
         // Throttle
-        if ( Input.GetKey(KeyCode.Space) )
-            rigidBody.AddForce( transform.forward * Force * Time.fixedDeltaTime);
+        if ( Input.GetKey(KeyCode.Space) ) {
+            rigidBody.AddForce(transform.up * Force * Time.fixedDeltaTime);
+            EngineEffect.Play();
+        }
+            
 
         if ( Input.GetKey( KeyCode.LeftArrow ) )
             TurnLeft( );
@@ -52,14 +61,24 @@ public class SpaceShip : MonoBehaviour {
         if ( Input.GetKey( KeyCode.RightArrow ) )
             TurnRight( );
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey( KeyCode.UpArrow ))
             Fire();
     }
 
-    private void OnCollisionEnter(Collision other)
+    private bool IsLandingOk() {
+        var angle = initialRotation.eulerAngles.z - rigidBody.rotation.eulerAngles.z;
+        return rigidBody.velocity.magnitude < MaxLandingSpeed && angle < MaxLandingAngle;
+    }
+
+    private void OnCollisionEnter( Collision other )
     {
-        ResetPosition( );
-        Debug.Log( "entered" );
+        if ( other.gameObject.name == "Platform" && IsLandingOk( ) ) {
+            Debug.Log( "Landing OK" );
+            ResetPosition( );
+        } else {
+            Debug.Log( "Landing Failed" );
+            ResetPosition( );
+        }
     }
 
     private void Fire( )
@@ -70,19 +89,18 @@ public class SpaceShip : MonoBehaviour {
             previousShotTime = Time.time;
             Rigidbody projectile = Instantiate(projectilePrefab, cannon.transform.position, cannon.transform.rotation );
             projectile.GetComponent<Projectile>( ).SetToIgnorePlayerCollisions();
-            //projectile.GetComponent<Projectile>().SetVelocity( projectileSpeed * cannon.transform.forward);
         }
     }
 
     private void TurnRight( )
     {
-        Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.fixedDeltaTime);
+        Quaternion deltaRotation = Quaternion.Euler(-eulerAngleVelocity * Time.fixedDeltaTime);
         rigidBody.MoveRotation(rigidBody.rotation * deltaRotation);
     }
 
     private void TurnLeft( )
     {
-        Quaternion deltaRotation = Quaternion.Euler(-eulerAngleVelocity * Time.fixedDeltaTime);
+        Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.fixedDeltaTime);
         rigidBody.MoveRotation(rigidBody.rotation * deltaRotation);
     }
 }
