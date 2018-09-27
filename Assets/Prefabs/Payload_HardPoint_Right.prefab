@@ -69,6 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4194704407300010}
   - component: {fileID: 136726997986531274}
+  - component: {fileID: 114380295096863438}
   m_Layer: 0
   m_Name: Payload_HardPoint_Right
   m_TagString: Untagged
@@ -83,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1769898785341392}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9, y: -51.53, z: -21.03}
+  m_LocalPosition: {x: 54.6, y: -19.4, z: -17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4367301622065796}
@@ -213,6 +214,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1084249531549982}
   m_Mesh: {fileID: 4300002, guid: c337dd4e5d6d6d34fbf42aa314693fd9, type: 3}
+--- !u!114 &114380295096863438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1769898785341392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9665eff7176c425d84c0670a514f49c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLeftPackage: 0
 --- !u!136 &136726997986531274
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -220,7 +233,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1769898785341392}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 2.31
   m_Height: 9.06
