@@ -27,6 +27,9 @@ public class SpaceShip : MonoBehaviour {
 
     public bool IsLanded = true;
 
+    GameObject LeftPackage = null;
+    GameObject RightPackage = null;
+
     // Use this for initialization
     void Start ( ) {
         rigidBody = GetComponent<Rigidbody>( );
@@ -34,6 +37,7 @@ public class SpaceShip : MonoBehaviour {
         initialPosition = transform.position;
         initialRotation = transform.rotation;
         previousShotTime = Time.time;
+
     }
 
     void ResetPosition( ) {
@@ -65,6 +69,29 @@ public class SpaceShip : MonoBehaviour {
             Fire();
     }
 
+    public void AttachRightPackage( GameObject package ) {
+        if (RightPackage != null) return;
+        var hpoint = GameObject.Find("HardPoint_Right");
+        package.transform.position = Vector3.zero;
+        //package.transform.rotation = ;
+        var npackage = Instantiate(package, hpoint.transform);
+        package.SetActive(false);
+        Destroy(package);
+        RightPackage = npackage;
+    }
+
+    public void AttachLeftPackage(GameObject package )
+    {
+        if (LeftPackage != null) return;
+        var hpoint = GameObject.Find("HardPoint_Left");
+        package.transform.position = Vector3.zero;
+        //package.transform.rotation = ;
+        var npackage = Instantiate(package, hpoint.transform);
+        package.SetActive(false);
+        Destroy(package);
+        LeftPackage = npackage;
+    }
+
     private bool IsLandingOk() {
         var angle = initialRotation.eulerAngles.z - rigidBody.rotation.eulerAngles.z;
         return rigidBody.velocity.magnitude < MaxLandingSpeed && angle < MaxLandingAngle;
@@ -74,10 +101,10 @@ public class SpaceShip : MonoBehaviour {
     {
         if ( other.gameObject.name == "Platform" && IsLandingOk( ) ) {
             Debug.Log( "Landing OK" );
-            ResetPosition( );
+            //ResetPosition( );
         } else {
             Debug.Log( "Landing Failed" );
-            ResetPosition( );
+            //ResetPosition( );
         }
     }
 
