@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4012233270080540}
   - component: {fileID: 33875079183836810}
   - component: {fileID: 23900627196015758}
-  - component: {fileID: 64472461608699514}
   m_Layer: 0
   m_Name: PlatformEdge
   m_TagString: Untagged
@@ -39,7 +38,6 @@ GameObject:
   - component: {fileID: 4254870239846708}
   - component: {fileID: 33513911330826424}
   - component: {fileID: 23492502871754512}
-  - component: {fileID: 64465880775154100}
   m_Layer: 0
   m_Name: PlatformRing
   m_TagString: Untagged
@@ -57,7 +55,6 @@ GameObject:
   - component: {fileID: 4552540281916170}
   - component: {fileID: 33871690180280362}
   - component: {fileID: 23950731344657074}
-  - component: {fileID: 64650130770551174}
   m_Layer: 0
   m_Name: PlatformDisc
   m_TagString: Untagged
@@ -73,6 +70,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4009909437436796}
+  - component: {fileID: 65097001377415488}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -258,45 +256,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1128627812815550}
   m_Mesh: {fileID: 4300002, guid: 748bd14dce39d6b42aeedfb6f088920c, type: 3}
---- !u!64 &64465880775154100
-MeshCollider:
+--- !u!65 &65097001377415488
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1645703985976314}
+  m_GameObject: {fileID: 1861588528792892}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 748bd14dce39d6b42aeedfb6f088920c, type: 3}
---- !u!64 &64472461608699514
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1128627812815550}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300002, guid: 748bd14dce39d6b42aeedfb6f088920c, type: 3}
---- !u!64 &64650130770551174
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1848924216114272}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300004, guid: 748bd14dce39d6b42aeedfb6f088920c, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 3.62, y: 0.18, z: 3.65}
+  m_Center: {x: 0, y: -0.06, z: 0}
