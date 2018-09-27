@@ -55,7 +55,8 @@ GameObject:
   - component: {fileID: 136415138352334772}
   - component: {fileID: 136061161838740208}
   - component: {fileID: 54424709610722648}
-  m_Layer: 0
+  - component: {fileID: 114504526778873704}
+  m_Layer: 9
   m_Name: PlayerShip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +251,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: -0.031000003, z: -0.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4850005463058190}
   m_Father: {fileID: 4227194162654516}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: -90, z: 90}
@@ -261,7 +263,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1084527026830448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -60.53, z: -21.03}
+  m_LocalPosition: {x: 0, y: -58.4, z: -21.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4230223108236020}
@@ -284,7 +286,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4117174410346628}
-  - {fileID: 4850005463058190}
   m_Father: {fileID: 4192011315984370}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -403,12 +404,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1749760734627744}
-  m_LocalRotation: {x: -0, y: -0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: 0.009499997, z: 0.2}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.4800008, z: -0.040501505}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4227194162654516}
-  m_RootOrder: 1
+  m_Father: {fileID: 4117174410346628}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: -90, z: 90}
 --- !u!4 &4959301771145992
 Transform:
@@ -656,6 +657,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114504526778873704
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1084527026830448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c21375ba705442b5afec170f8fd013b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ship: {fileID: 1084527026830448}
+  RotationSpeed: 100
+  Force: 2000
+  projectilePrefab: {fileID: 54357936634447922, guid: e2c0bba29d88449b0b7bb15f6ece14a1,
+    type: 2}
+  projectileSpeed: 100
+  MaxLandingAngle: 15
+  MaxLandingSpeed: 10
+  cannon: {fileID: 1186624934016022}
+  EngineEffect: {fileID: 198590605404362250}
+  rateOfFire: 5
+  IsLanded: 1
 --- !u!136 &136050591231604640
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -728,11 +752,11 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1749760734627744}
   serializedVersion: 5
-  lengthInSec: 10
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
-  looping: 1
-  prewarm: 1
+  looping: 0
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -781,7 +805,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1385694375
+  randomSeed: 165264784
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4089,11 +4113,11 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1165825464146424}
   serializedVersion: 5
-  lengthInSec: 10
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
-  looping: 1
-  prewarm: 1
+  looping: 0
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -4142,7 +4166,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1219358217
+  randomSeed: -1976069815
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6654,10 +6678,10 @@ ParticleSystem:
     radiusScale: 1
   SubModule:
     serializedVersion: 2
-    enabled: 0
+    enabled: 1
     subEmitters:
     - serializedVersion: 2
-      emitter: {fileID: 0}
+      emitter: {fileID: 198317692072806818}
       type: 0
       properties: 0
   LightsModule:
