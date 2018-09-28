@@ -6,6 +6,8 @@ using UnityEngine;
 public class SpaceShip : MonoBehaviour {
 
     public GameObject ship;
+    public float SecondsToRestartAfterDeath = 3f;
+    public int shields = 1;
     public float RotationSpeed = 100.0f;
     public float Force = 2000.0f;
     private Rigidbody rigidBody;
@@ -17,6 +19,7 @@ public class SpaceShip : MonoBehaviour {
 
     [SerializeField] GameObject cannon;
     [SerializeField] ParticleSystem EngineEffect;
+    
 
     Vector3 eulerAngleVelocity;
     Vector3 initialPosition;
@@ -26,6 +29,7 @@ public class SpaceShip : MonoBehaviour {
     public float rateOfFire = 1.0f;
 
     public bool IsLanded = true;
+    public bool IsAlive = true;
 
     GameObject LeftPackage = null;
     GameObject RightPackage = null;
@@ -40,7 +44,9 @@ public class SpaceShip : MonoBehaviour {
 
     }
 
-    void ResetPosition( ) {
+    void ResetPosition( )
+    {
+        IsAlive = true;
         transform.position = initialPosition;
         transform.rotation = initialRotation;
         rigidBody.angularVelocity = new Vector3( );
@@ -48,7 +54,10 @@ public class SpaceShip : MonoBehaviour {
     }
 
 	// Update is called once per frame
-	void FixedUpdate ( ) {
+	void FixedUpdate ( )
+	{
+	    if (!IsAlive) return;
+
         //update camera position
         //mainCamera.transform.position.Set(transform.position.x, transform.position.y, mainCamera.transform.position.z);
 
@@ -99,6 +108,9 @@ public class SpaceShip : MonoBehaviour {
 
     private void OnCollisionEnter( Collision other )
     {
+        // Cause enough damage to kill anything on collision (Will not do anything to landing pads etc)
+        other.gameObject.SendMessageUpwards("ApplyDamage", 1000, SendMessageOptions.DontRequireReceiver);
+
         if ( other.gameObject.name == "Platform" && IsLandingOk( ) ) {
             Debug.Log( "Landing OK" );
             //ResetPosition( );
@@ -129,5 +141,18 @@ public class SpaceShip : MonoBehaviour {
     {
         Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.fixedDeltaTime);
         rigidBody.MoveRotation(rigidBody.rotation * deltaRotation);
+    }
+
+    void ApplyDamage(int value)
+    {
+        shields -= value;
+        if (shields <= 0 && IsAlive) Die();
+    }
+
+    void Die()
+    {
+        IsAlive = false;
+        Invoke("ResetPosition", SecondsToRestartAfterDeath);
+        // TODO: Play death animation + sound effects
     }
 }

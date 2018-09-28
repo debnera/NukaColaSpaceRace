@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyShip : MonoBehaviour
 {
     public ParticleSystem deathParticleSystem;
-    public int shieldPoints;
+    public int shields;
     public int reward;
     public float maxSpeed = 1.0f;
     public float maxAcceleration = 0.1f;
@@ -61,8 +61,8 @@ public class EnemyShip : MonoBehaviour
 
     void ApplyDamage(int value)
     {
-        shieldPoints -= value;
-        if (shieldPoints < 0 && alive)
+        shields -= value;
+        if (shields <= 0 && alive)
         {
             Die();
         }
@@ -79,5 +79,11 @@ public class EnemyShip : MonoBehaviour
         FindObjectOfType<SpaceShip>().SendMessage("AddPoints", reward, SendMessageOptions.RequireReceiver);
         Destroy(gameObject);
     }
-    
+
+    void OnCollisionEnter(Collision collision)
+    {
+        // Cause enough damage to kill anything on collision
+        collision.gameObject.SendMessageUpwards("ApplyDamage", 1000, SendMessageOptions.DontRequireReceiver);
+    }
+
 }

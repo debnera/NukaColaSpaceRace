@@ -39,6 +39,7 @@ public class Projectile : MonoBehaviour
             ParticleSystem pSystem = Instantiate(collisionParticleSystem, transform.position, transform.rotation);
             pSystem.Play();
         }
+        collision.gameObject.SendMessageUpwards("ApplyDamage", 1, SendMessageOptions.DontRequireReceiver);
         Destroy(gameObject);
     }
 }
