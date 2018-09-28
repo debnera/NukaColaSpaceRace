@@ -128,6 +128,7 @@ public class SpaceShip : MonoBehaviour {
             previousShotTime = Time.time;
             Rigidbody projectile = Instantiate(projectilePrefab, cannon.transform.position, cannon.transform.rotation );
             projectile.GetComponent<Projectile>( ).SetToIgnorePlayerCollisions();
+            projectile.GetComponent<Projectile>().speed = projectileSpeed;
         }
     }
 
