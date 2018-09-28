@@ -180,11 +180,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924489811dbb9754ab194448c72364a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathParticleSystem: {fileID: 0}
+  shields: 0
+  reward: 0
   maxSpeed: 5
   maxAcceleration: 3
   rateOfFire: 1
   degreesBetweenShots: 30
-  projectilePrefab: {fileID: 54357936634447922, guid: d3c6fbe2cf2c99347bc42837acef37be,
+  projectilePrefab: {fileID: 54133281265602614, guid: d3c6fbe2cf2c99347bc42837acef37be,
     type: 2}
   movementEndPoint: {fileID: 1478117679669756}
 --- !u!136 &136550357462201424
