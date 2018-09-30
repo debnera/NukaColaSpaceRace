@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 4458745065912250}
   - component: {fileID: 135478581158136010}
   - component: {fileID: 54133281265602614}
+  - component: {fileID: 114353497307957950}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -71,7 +72,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4677618745692970}
   - component: {fileID: 33918693278940944}
-  - component: {fileID: 135481404497879310}
   - component: {fileID: 23057040822428664}
   m_Layer: 0
   m_Name: Sphere
@@ -186,11 +186,25 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114353497307957950
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1341423612309044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d736c6a4d6ad5b343827950c96a48c1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  maxSecondsAlive: 10
+  collisionParticleSystem: {fileID: 0}
 --- !u!135 &135478581158136010
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -202,18 +216,6 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.35
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &135481404497879310
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1843290168145860}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198352209647113752
 ParticleSystem:

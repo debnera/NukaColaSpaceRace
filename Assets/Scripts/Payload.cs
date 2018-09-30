@@ -5,6 +5,7 @@ using UnityEngine;
 public class Payload : MonoBehaviour {
 
     public bool isLeftPackage;
+    public int reward;
 
 	// Use this for initialization
 	void Start () {

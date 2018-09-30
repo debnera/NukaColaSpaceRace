@@ -669,9 +669,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ship: {fileID: 1084527026830448}
+  SecondsToRestartAfterDeath: 3
+  shields: 1
   RotationSpeed: 100
   Force: 2000
-  projectilePrefab: {fileID: 54357936634447922, guid: e2c0bba29d88449b0b7bb15f6ece14a1,
+  projectilePrefab: {fileID: 54133281265602614, guid: d3c6fbe2cf2c99347bc42837acef37be,
     type: 2}
   projectileSpeed: 100
   MaxLandingAngle: 15
@@ -680,6 +682,7 @@ MonoBehaviour:
   EngineEffect: {fileID: 198590605404362250}
   rateOfFire: 5
   IsLanded: 1
+  IsAlive: 1
 --- !u!136 &136050591231604640
 CapsuleCollider:
   m_ObjectHideFlags: 1

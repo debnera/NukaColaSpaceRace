@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyShip : MonoBehaviour
 {
+    public ParticleSystem deathParticleSystem;
+    public int shields;
+    public int reward;
     public float maxSpeed = 1.0f;
     public float maxAcceleration = 0.1f;
     public float rateOfFire = 1.0f;
@@ -17,6 +20,7 @@ public class EnemyShip : MonoBehaviour
     private float shootingAngle;
     private float previousShotTime;
     private float speed;
+    private bool alive = true;
 
 	// Use this for initialization
 	void Start ()
@@ -28,7 +32,10 @@ public class EnemyShip : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void FixedUpdate ()
+	{
+	    if (!alive) return;
+
 	    // Move towards target position
 	    speed = Mathf.Clamp(speed + maxAcceleration * Time.fixedDeltaTime, -maxSpeed, maxSpeed);
 	    transform.position = Vector3.MoveTowards(transform.position, endPoint, speed * Time.fixedDeltaTime);
@@ -51,4 +58,32 @@ public class EnemyShip : MonoBehaviour
 	        shootingAngle += degreesBetweenShots;
         }
     }
+
+    void ApplyDamage(int value)
+    {
+        shields -= value;
+        if (shields <= 0 && alive)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        alive = false;
+        if (deathParticleSystem != null)
+        {
+            ParticleSystem pSystem = Instantiate(deathParticleSystem, transform.position, transform.rotation);
+            pSystem.Play();
+        }
+        FindObjectOfType<GameManager>().AddToScore(reward);
+        Destroy(gameObject);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        // Cause enough damage to kill anything on collision
+        collision.gameObject.SendMessageUpwards("ApplyDamage", 1000, SendMessageOptions.DontRequireReceiver);
+    }
+
 }
