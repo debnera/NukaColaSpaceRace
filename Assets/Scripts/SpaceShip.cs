@@ -34,6 +34,8 @@ public class SpaceShip : MonoBehaviour {
     GameObject LeftPackage = null;
     GameObject RightPackage = null;
 
+    private GameManager gameManager;
+
     // Use this for initialization
     void Start ( ) {
         rigidBody = GetComponent<Rigidbody>( );
@@ -41,7 +43,7 @@ public class SpaceShip : MonoBehaviour {
         initialPosition = transform.position;
         initialRotation = transform.rotation;
         previousShotTime = Time.time;
-
+        gameManager = GameManager.GetInstance();
     }
 
     void ResetPosition( )
@@ -108,15 +110,33 @@ public class SpaceShip : MonoBehaviour {
 
     private void OnCollisionEnter( Collision other )
     {
+        if (!IsAlive) return; // Dead player cannot cause damage or return payloads to base
+
         // Cause enough damage to kill anything on collision (Will not do anything to landing pads etc)
         other.gameObject.SendMessageUpwards("ApplyDamage", 1000, SendMessageOptions.DontRequireReceiver);
 
         if ( other.gameObject.name == "Platform" && IsLandingOk( ) ) {
             Debug.Log( "Landing OK" );
-            //ResetPosition( );
+
+            if (LeftPackage)
+            {
+                int score = LeftPackage.GetComponent<Payload>().reward;
+                gameManager.CollectCargo();
+                gameManager.AddToScore(score);
+                Destroy(LeftPackage);
+                LeftPackage = null;
+            }
+            if (RightPackage)
+            {
+                int score = RightPackage.GetComponent<Payload>().reward;
+                gameManager.CollectCargo();
+                gameManager.AddToScore(score);
+                Destroy(RightPackage);
+                RightPackage = null;
+            }
         } else {
             Debug.Log( "Landing Failed" );
-            //ResetPosition( );
+            Die();
         }
     }
 
@@ -153,6 +173,7 @@ public class SpaceShip : MonoBehaviour {
     void Die()
     {
         IsAlive = false;
+        gameManager.ReducePlayerLives();
         Invoke("ResetPosition", SecondsToRestartAfterDeath);
         // TODO: Play death animation + sound effects
     }
