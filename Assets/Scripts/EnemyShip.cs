@@ -10,7 +10,9 @@ public class EnemyShip : MonoBehaviour
     public float maxSpeed = 1.0f;
     public float maxAcceleration = 0.1f;
     public float rateOfFire = 1.0f;
-    public float degreesBetweenShots = 30.0f;
+    //public float degreesBetweenShots = 30.0f;
+    public float detectionRange = 50;
+    public float maxInaccuracyAngle = 10.0f;
     public Rigidbody projectilePrefab;
     public GameObject movementEndPoint;
 
@@ -21,6 +23,7 @@ public class EnemyShip : MonoBehaviour
     private float previousShotTime;
     private float speed;
     private bool alive = true;
+    private GameObject player;
 
 	// Use this for initialization
 	void Start ()
@@ -29,6 +32,8 @@ public class EnemyShip : MonoBehaviour
 	    endPoint = movementEndPoint.transform.position;
 	    movementEndPoint.SetActive(false);
 	    previousShotTime = Time.time;
+	    player = FindObjectOfType<SpaceShip>().gameObject;
+
 	}
 	
 	// Update is called once per frame
@@ -50,13 +55,41 @@ public class EnemyShip : MonoBehaviour
 	    }
 
         // Handle shooting
-	    if (Time.time - previousShotTime > (1 / rateOfFire))
+	    if (Time.time - previousShotTime > (1 / rateOfFire) && IsPlayerInLineOfSight())
 	    {
 	        previousShotTime = Time.time;
-            Rigidbody projectile = Instantiate(projectilePrefab, transform.position, Quaternion.Euler(0, 0, shootingAngle));
-	        projectile.GetComponent<Projectile>().SetToIgnoreEnemyCollisions();  // Enemies cannot kill enemies
-	        shootingAngle += degreesBetweenShots;
+            //Rigidbody projectile = Instantiate(projectilePrefab, transform.position, Quaternion.Euler(0, 0, shootingAngle));
+	        Rigidbody projectile = Instantiate(projectilePrefab, transform.position, GetShootingQuaternion());
+            projectile.GetComponent<Projectile>().SetToIgnoreEnemyCollisions();  // Enemies cannot kill enemies
+	        //shootingAngle += degreesBetweenShots;
         }
+    }
+
+    bool IsPlayerInLineOfSight()
+    {
+        // Returns true if player is within range and is on line of sight
+        RaycastHit hit;
+        int layerMask = ~LayerMask.NameToLayer("Enemy"); // Ignore collisions with enemies
+        Debug.DrawRay(transform.position, GetVectorToPlayer() * detectionRange, Color.yellow);
+        if (Physics.Raycast(transform.position, GetVectorToPlayer(), out hit, detectionRange, layerMask))
+        {
+            Debug.Log(hit);
+            return hit.collider.gameObject == player;
+        }
+        return false;
+    }
+
+    Vector3 GetVectorToPlayer()
+    {
+        return ((player.GetComponent<Rigidbody>().centerOfMass + player.transform.position) - transform.position).normalized;
+    }
+
+    Quaternion GetShootingQuaternion()
+    {
+        Vector3 dir = GetVectorToPlayer();
+        var angle = Vector3.Angle(transform.up, dir);
+        angle += Random.Range(-maxInaccuracyAngle, maxInaccuracyAngle);
+        return Quaternion.Euler(0, 0, angle + 90);
     }
 
     void ApplyDamage(int value)

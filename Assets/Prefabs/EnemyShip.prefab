@@ -68,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1060344705202354}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -13, y: -3.867562, z: -17}
+  m_LocalPosition: {x: -41.4, y: -11.1, z: -17}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 4330559854233752}
@@ -181,12 +181,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathParticleSystem: {fileID: 0}
-  shields: 0
-  reward: 0
-  maxSpeed: 5
-  maxAcceleration: 3
+  shields: 10
+  reward: 100
+  maxSpeed: 20
+  maxAcceleration: 10
   rateOfFire: 1
-  degreesBetweenShots: 30
+  detectionRange: 200
+  maxInaccuracyAngle: 5
   projectilePrefab: {fileID: 54133281265602614, guid: d3c6fbe2cf2c99347bc42837acef37be,
     type: 2}
   movementEndPoint: {fileID: 1478117679669756}
