@@ -76,7 +76,7 @@ public class EnemyShip : MonoBehaviour
             ParticleSystem pSystem = Instantiate(deathParticleSystem, transform.position, transform.rotation);
             pSystem.Play();
         }
-        FindObjectOfType<SpaceShip>().SendMessage("AddPoints", reward, SendMessageOptions.RequireReceiver);
+        FindObjectOfType<GameManager>().AddToScore(reward);
         Destroy(gameObject);
     }
 
