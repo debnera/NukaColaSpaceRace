@@ -14,12 +14,14 @@ public class SpaceShip : MonoBehaviour {
     public Rigidbody projectilePrefab;
     public float projectileSpeed = 100;
 
+    public GameObject Shooting;
+    private AudioSource shootingSound;
+
     public float MaxLandingAngle = 10.0f;
     public float MaxLandingSpeed = 3.0f;
 
     [SerializeField] GameObject cannon;
     [SerializeField] ParticleSystem EngineEffect;
-    
 
     Vector3 eulerAngleVelocity;
     Vector3 initialPosition;
@@ -44,6 +46,7 @@ public class SpaceShip : MonoBehaviour {
         initialRotation = transform.rotation;
         previousShotTime = Time.time;
         gameManager = GameManager.GetInstance();
+        shootingSound = Shooting.GetComponent<AudioSource>();
     }
 
     void ResetPosition( )
@@ -149,6 +152,7 @@ public class SpaceShip : MonoBehaviour {
             Rigidbody projectile = Instantiate(projectilePrefab, cannon.transform.position, cannon.transform.rotation );
             projectile.GetComponent<Projectile>( ).SetToIgnorePlayerCollisions();
             projectile.GetComponent<Projectile>().speed = projectileSpeed;
+            shootingSound.Play();
         }
     }
 
