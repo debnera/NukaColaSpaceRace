@@ -89,9 +89,9 @@ public class SpaceShip : MonoBehaviour {
     public void AttachRightPackage( GameObject package ) {
         if (RightPackage != null) return;
         var hpoint = GameObject.Find("HardPoint_Right");
-        package.transform.position = Vector3.zero;
-        //package.transform.rotation = ;
         var npackage = Instantiate(package, hpoint.transform);
+        npackage.transform.localPosition = Vector3.zero;
+        npackage.transform.localScale = Vector3.one;
         package.SetActive(false);
         Destroy(package);
         RightPackage = npackage;
@@ -101,9 +101,10 @@ public class SpaceShip : MonoBehaviour {
     {
         if (LeftPackage != null) return;
         var hpoint = GameObject.Find("HardPoint_Left");
-        package.transform.position = Vector3.zero;
-        //package.transform.rotation = ;
         var npackage = Instantiate(package, hpoint.transform);
+        print(npackage);
+        npackage.transform.localPosition = Vector3.zero;
+        npackage.transform.localScale = Vector3.one;
         package.SetActive(false);
         Destroy(package);
         LeftPackage = npackage;
