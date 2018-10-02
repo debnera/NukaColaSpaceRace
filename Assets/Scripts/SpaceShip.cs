@@ -16,8 +16,12 @@ public class SpaceShip : MonoBehaviour {
 
     public GameObject ShootingSound;
     public GameObject DestroyedSound;
+    public GameObject LandingSound;
+    public GameObject CargoSound;
     private AudioSource shootingSound;
     private AudioSource destroyedSound;
+    private AudioSource landingSound;
+    private AudioSource cargoSound;
 
     public float MaxLandingAngle = 10.0f;
     public float MaxLandingSpeed = 3.0f;
@@ -50,6 +54,8 @@ public class SpaceShip : MonoBehaviour {
         gameManager = GameManager.GetInstance();
         shootingSound = ShootingSound.GetComponent<AudioSource>();
         destroyedSound = DestroyedSound.GetComponent<AudioSource>();
+        landingSound = LandingSound.GetComponent<AudioSource>();
+        cargoSound = CargoSound.GetComponent<AudioSource>();
     }
 
     void ResetPosition( )
@@ -88,6 +94,7 @@ public class SpaceShip : MonoBehaviour {
 
     public void AttachRightPackage( GameObject package ) {
         if (RightPackage != null) return;
+        cargoSound.Play();
         var hpoint = GameObject.Find("HardPoint_Right");
         package.transform.position = Vector3.zero;
         //package.transform.rotation = ;
@@ -100,6 +107,7 @@ public class SpaceShip : MonoBehaviour {
     public void AttachLeftPackage(GameObject package )
     {
         if (LeftPackage != null) return;
+        cargoSound.Play();
         var hpoint = GameObject.Find("HardPoint_Left");
         package.transform.position = Vector3.zero;
         //package.transform.rotation = ;
@@ -149,20 +157,24 @@ public class SpaceShip : MonoBehaviour {
             Die();
             return;
         }
-
-        // Handle safe collisions
-        IsLanded = IsLandingOk();
         
+    }
+
+    private bool IsFirstLanding() {
+        return (IsLanded == false && IsLandingOk());
     }
 
     private void OnCollisionStay(Collision other)
     {
+        if (IsFirstLanding()) landingSound.Play();
+
         IsLanded = IsLandingOk();
         if ( other.gameObject.GetComponent<HomePlatform>() && IsLanded ) {
             Debug.Log( "Landing OK" );
 
             if (LeftPackage)
             {
+                cargoSound.Play();
                 int score = LeftPackage.GetComponent<Payload>().reward;
                 gameManager.CollectCargo();
                 gameManager.AddToScore(score);
@@ -171,6 +183,7 @@ public class SpaceShip : MonoBehaviour {
             }
             if (RightPackage)
             {
+                cargoSound.Play();
                 int score = RightPackage.GetComponent<Payload>().reward;
                 gameManager.CollectCargo();
                 gameManager.AddToScore(score);
