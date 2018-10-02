@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4090303242404484}
   - component: {fileID: 33013359268660354}
   - component: {fileID: 23227246450188112}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyUFO_Engine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4703668564380602}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyUFO_model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4307388375201602}
   - component: {fileID: 33011424950557018}
   - component: {fileID: 23889996165909516}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyUFO_Windows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4481355442105976}
   - component: {fileID: 198410957811765534}
   - component: {fileID: 199691250687986982}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EngineEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 33028976101299688}
   - component: {fileID: 65353714308780268}
   - component: {fileID: 23973884724831908}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyEndPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 4418724984192918}
   - component: {fileID: 33957874132028936}
   - component: {fileID: 23233836501314784}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyUFO_Hull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4196125337742126}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Weapon_top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 136364553075880044}
   - component: {fileID: 65934471761836010}
   - component: {fileID: 114208416671633326}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyUFO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4607689196970866}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Weapon_mid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +280,7 @@ Transform:
   m_GameObject: {fileID: 1119796600171602}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 5.9444337, y: 0.2560707, z: 0}
-  m_LocalScale: {x: 0.8000004, y: 0.8000004, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4257995591041008}
   m_RootOrder: 4
@@ -485,7 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathParticleSystem: {fileID: 0}
-  shields: 10
+  shields: 5
   reward: 100
   maxSpeed: 20
   maxAcceleration: 10
