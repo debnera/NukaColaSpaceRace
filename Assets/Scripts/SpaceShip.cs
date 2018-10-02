@@ -114,6 +114,27 @@ public class SpaceShip : MonoBehaviour {
         return rigidBody.velocity.magnitude < MaxLandingSpeed && angle < MaxLandingAngle;
     }
 
+    private bool IsLandingAngleOk()
+    {
+        var angle = initialRotation.eulerAngles.z - rigidBody.rotation.eulerAngles.z;
+        return  angle < MaxLandingAngle;
+    }
+
+    private bool IsCollisionSafe(Collision other)
+    {
+        // Projectile hits are handled by separate code
+        if (other.gameObject.GetComponent<Projectile>()) 
+            return true;
+
+        if (other.gameObject.GetComponent<HomePlatform>() ||
+            other.gameObject.GetComponent<PayloadPlatform>())
+        {
+            return IsLandingAngleOk();
+        }
+
+        return false;
+    }
+
     private void OnCollisionEnter( Collision other )
     {
         if (!IsAlive) return; // Dead player cannot cause damage or return payloads to base
@@ -121,7 +142,23 @@ public class SpaceShip : MonoBehaviour {
         // Cause enough damage to kill anything on collision (Will not do anything to landing pads etc)
         other.gameObject.SendMessageUpwards("ApplyDamage", 1000, SendMessageOptions.DontRequireReceiver);
 
-        if ( other.gameObject.name == "Platform" && IsLandingOk( ) ) {
+        // Handle unsafe collisions
+        if (!IsCollisionSafe(other))
+        {
+            Debug.Log( "Landing Failed" );
+            Die();
+            return;
+        }
+
+        // Handle safe collisions
+        IsLanded = IsLandingOk();
+        
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        IsLanded = IsLandingOk();
+        if ( other.gameObject.GetComponent<HomePlatform>() && IsLanded ) {
             Debug.Log( "Landing OK" );
 
             if (LeftPackage)
@@ -140,10 +177,12 @@ public class SpaceShip : MonoBehaviour {
                 Destroy(RightPackage);
                 RightPackage = null;
             }
-        } else {
-            Debug.Log( "Landing Failed" );
-            Die();
         }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        IsLanded = false;
     }
 
     private void Fire( )

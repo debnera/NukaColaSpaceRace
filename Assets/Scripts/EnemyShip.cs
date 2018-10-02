@@ -71,10 +71,8 @@ public class EnemyShip : MonoBehaviour
         // Returns true if player is within range and is on line of sight
         RaycastHit hit;
         int layerMask = ~LayerMask.NameToLayer("Enemy"); // Ignore collisions with enemies
-        Debug.DrawRay(transform.position, GetVectorToPlayer() * detectionRange, Color.yellow);
         if (Physics.Raycast(transform.position, GetVectorToPlayer(), out hit, detectionRange, layerMask))
         {
-            Debug.Log(hit);
             return hit.collider.gameObject == player;
         }
         return false;
