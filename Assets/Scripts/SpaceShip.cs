@@ -14,8 +14,10 @@ public class SpaceShip : MonoBehaviour {
     public Rigidbody projectilePrefab;
     public float projectileSpeed = 100;
 
-    public GameObject Shooting;
+    public GameObject ShootingSound;
+    public GameObject DestroyedSound;
     private AudioSource shootingSound;
+    private AudioSource destroyedSound;
 
     public float MaxLandingAngle = 10.0f;
     public float MaxLandingSpeed = 3.0f;
@@ -46,7 +48,8 @@ public class SpaceShip : MonoBehaviour {
         initialRotation = transform.rotation;
         previousShotTime = Time.time;
         gameManager = GameManager.GetInstance();
-        shootingSound = Shooting.GetComponent<AudioSource>();
+        shootingSound = ShootingSound.GetComponent<AudioSource>();
+        destroyedSound = DestroyedSound.GetComponent<AudioSource>();
     }
 
     void ResetPosition( )
@@ -179,6 +182,7 @@ public class SpaceShip : MonoBehaviour {
         IsAlive = false;
         gameManager.ReducePlayerLives();
         Invoke("ResetPosition", SecondsToRestartAfterDeath);
-        // TODO: Play death animation + sound effects
+        // TODO: Play death animation
+        destroyedSound.Play();
     }
 }
