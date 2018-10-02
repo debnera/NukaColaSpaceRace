@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerShootArray : MonoBehaviour
 {
-
     private AudioSource audioSource;
     public AudioClip[] shoot;
     private AudioClip shootClip;
+
     void Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
@@ -23,4 +23,3 @@ public class PlayerShootArray : MonoBehaviour
         }
     }
 }
-
