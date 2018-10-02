@@ -7,21 +7,17 @@ public class Payload : MonoBehaviour {
     public bool isLeftPackage;
     public int reward;
 
-	// Use this for initialization
-	void Start () {
-		
+	public bool TryAttachPayload(GameObject target)
+	{
+		SpaceShip player = target.GetComponent<SpaceShip>();
+		if (player && player.IsLanded)
+		{
+			if (isLeftPackage)
+				player.AttachLeftPackage(gameObject);
+			else
+				player.AttachRightPackage(gameObject);
+			return true;
+		}
+		return false;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (isLeftPackage)
-            other.gameObject.SendMessage("AttachLeftPackage", gameObject,SendMessageOptions.DontRequireReceiver);
-        else
-            other.gameObject.SendMessage("AttachRightPackage", gameObject, SendMessageOptions.DontRequireReceiver);
-    }
 }
