@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: b6daba1470334a243ad3ffede897ccfd
+timeCreated: 1538480456
+licenseType: Pro
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Swis721 BlkEx BT
+  fontNames:
+  - Swis721 BlkEx BT
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
