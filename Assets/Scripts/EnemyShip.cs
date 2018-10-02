@@ -36,6 +36,7 @@ public class EnemyShip : MonoBehaviour
 
 	}
 	
+	
 	// Update is called once per frame
 	void FixedUpdate ()
 	{
