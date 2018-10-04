@@ -18,6 +18,9 @@ public class SpaceShip : MonoBehaviour {
     public GameObject DestroyedSound;
     public GameObject LandingSound;
     public GameObject CargoSound;
+
+    [SerializeField] AudioClip[] shootingclips;
+
     private AudioSource shootingSound;
     private AudioSource destroyedSound;
     private AudioSource landingSound;
@@ -76,7 +79,7 @@ public class SpaceShip : MonoBehaviour {
         //mainCamera.transform.position.Set(transform.position.x, transform.position.y, mainCamera.transform.position.z);
 
         // Throttle
-        if ( Input.GetKey(KeyCode.Space) ) {
+        if ( Input.GetKey(KeyCode.UpArrow) ) {
             rigidBody.AddForce(transform.up * Force * Time.fixedDeltaTime);
             EngineEffect.Play();
         }
@@ -88,7 +91,7 @@ public class SpaceShip : MonoBehaviour {
         if ( Input.GetKey( KeyCode.RightArrow ) )
             TurnRight( );
 
-        if (Input.GetKey( KeyCode.UpArrow ))
+        if (Input.GetKey( KeyCode.Space))
             Fire();
     }
 
@@ -208,6 +211,8 @@ public class SpaceShip : MonoBehaviour {
             Rigidbody projectile = Instantiate(projectilePrefab, cannon.transform.position, cannon.transform.rotation );
             projectile.GetComponent<Projectile>( ).SetToIgnorePlayerCollisions();
             projectile.GetComponent<Projectile>().speed = projectileSpeed;
+            int index = UnityEngine.Random.Range(0, shootingclips.Length);
+            shootingSound.clip = shootingclips[index];
             shootingSound.Play();
         }
     }
