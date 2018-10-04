@@ -327,7 +327,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1084527026830448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.61, z: 0}
+  m_LocalPosition: {x: -12.52, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4230223108236020}
@@ -1179,9 +1179,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ship: {fileID: 1084527026830448}
+  PayloadForceMultiplier: 0.3
+  PayloadTorqueOffset: 1
   SecondsToRestartAfterDeath: 3
   shields: 1
-  RotationSpeed: 100
+  RotationSpeed: 3
   Force: 2000
   projectilePrefab: {fileID: 54133281265602614, guid: d3c6fbe2cf2c99347bc42837acef37be,
     type: 2}

@@ -6,7 +6,8 @@ using UnityEngine;
 public class SpaceShip : MonoBehaviour {
 
     public GameObject ship;
-    public float PayloadForce;
+    public float PayloadForceMultiplier = 0.3f;
+    public float PayloadTorqueOffset = 1f;
     public float SecondsToRestartAfterDeath = 3f;
     public int shields = 1;
     public float RotationSpeed = 100.0f;
@@ -101,8 +102,28 @@ public class SpaceShip : MonoBehaviour {
 
         // Throttle
         if ( Input.GetKey(KeyCode.UpArrow) ) {
-            rigidBody.AddForce(transform.up * Force * Time.fixedDeltaTime);
+            //rigidBody.AddForce(transform.up * Force * Time.fixedDeltaTime);
+            var scaledWorldDir = new Vector3(0, 1, 0);
+            var dir = transform.TransformVector(scaledWorldDir);
+            var forcePos = GetComponent<Rigidbody>().centerOfMass;
+            var payloadMultiplier = 1f;
+            if (LeftPackage)
+            {
+                forcePos.x += PayloadTorqueOffset;
+                payloadMultiplier -= PayloadForceMultiplier;
+            }
+
+            if (RightPackage)
+            {
+                forcePos.x -= PayloadTorqueOffset;
+                payloadMultiplier -= PayloadForceMultiplier;
+            }
+            forcePos = transform.TransformPoint(forcePos);
+            GetComponent<Rigidbody>().AddForceAtPosition(dir * Force * payloadMultiplier * Time.fixedDeltaTime, forcePos);
+            //rigidBody.AddForceAtPosition(transform.up * Force * Time.fixedDeltaTime);
+            Debug.DrawRay(forcePos, dir * 100);
             EngineEffect.Play();
+
         }
             
 	    // Fix rotation and z-position drift
@@ -113,21 +134,6 @@ public class SpaceShip : MonoBehaviour {
 	    var pos = transform.position;
 	    pos.z = initialPosition.z;
 	    transform.position = pos;
-	    
-	    // Add gravity to payloads
-	    if (LeftPackage)
-	    {
-	        var hpoint = GameObject.Find("HardPoint_Left");
-	        var dir = hpoint.transform.InverseTransformVector(new Vector3(0, 1, 0));
-	        GetComponent<Rigidbody>().AddForceAtPosition(dir * PayloadForce * Time.fixedDeltaTime, hpoint.transform.localPosition);
-	    }
-	    if (RightPackage)
-	    {
-	        var hpoint = GameObject.Find("HardPoint_Right");
-	        var dir = hpoint.transform.InverseTransformVector(new Vector3(0, 1, 0));
-	        GetComponent<Rigidbody>().AddForceAtPosition(dir * PayloadForce * Time.fixedDeltaTime, hpoint.transform.localPosition);
-	    }
-	    
 	    
         // Check input
         if ( Input.GetKey( KeyCode.LeftArrow ) )
@@ -142,6 +148,7 @@ public class SpaceShip : MonoBehaviour {
 	    print(GetComponent<Rigidbody>().centerOfMass);
     }
 
+
     public void AttachRightPackage( GameObject package ) {
         if (RightPackage != null) return;
         cargoSound.Play();
@@ -150,15 +157,9 @@ public class SpaceShip : MonoBehaviour {
         var npackage = Instantiate(package, hpoint.transform);
         npackage.transform.localPosition = Vector3.zero;
         npackage.transform.localScale = Vector3.one;
-//        var joint = hpoint.GetComponent<FixedJoint>();
-//        if (!joint)
-//            joint = hpoint.AddComponent<FixedJoint>();
-//        joint.connectedBody = npackage.GetComponent<Rigidbody>();
-//        npackage.GetComponent<Rigidbody>().isKinematic = false;
         package.SetActive(false);
         Destroy(package);
         RightPackage = npackage;
-        GetComponent<Rigidbody>().ResetCenterOfMass();
     }
 
     public void AttachLeftPackage(GameObject package )
@@ -169,15 +170,9 @@ public class SpaceShip : MonoBehaviour {
         var npackage = Instantiate(package, hpoint.transform);
         npackage.transform.localPosition = Vector3.zero;
         npackage.transform.localScale = Vector3.one;
-//        var joint = hpoint.GetComponent<FixedJoint>();
-//        if (!joint)
-//            joint = hpoint.AddComponent<FixedJoint>();
-//        joint.connectedBody = npackage.GetComponent<Rigidbody>();
-//        npackage.GetComponent<Rigidbody>().isKinematic = false;
         package.SetActive(false);
         Destroy(package);
         LeftPackage = npackage;
-        GetComponent<Rigidbody>().ResetCenterOfMass();
     }
 
     private bool IsLandingOk() {
@@ -279,19 +274,12 @@ public class SpaceShip : MonoBehaviour {
 
     private void TurnRight( )
     {
-//        Quaternion deltaRotation = Quaternion.Euler(-eulerAngleVelocity * Time.fixedDeltaTime);
-//        rigidBody.MoveRotation(rigidBody.rotation * deltaRotation);
-        
-        GetComponent<Rigidbody>().AddTorque(new Vector3(0, 0, -RotationSpeed));
-        //GetComponent<Rigidbody>().AddForceAtPosition(cannon.transform.right * RotationSpeed, cannon.transform.position, );
+        GetComponent<Rigidbody>().AddTorque(new Vector3(0, 0, -RotationSpeed), ForceMode.VelocityChange);
     }
 
     private void TurnLeft( )
     {
-//        Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.fixedDeltaTime);
-//        rigidBody.MoveRotation(rigidBody.rotation * deltaRotation);
-        GetComponent<Rigidbody>().AddTorque(new Vector3(0, 0, RotationSpeed));
-        //GetComponent<Rigidbody>().AddForceAtPosition(-cannon.transform.right * RotationSpeed, cannon.transform.position);
+        GetComponent<Rigidbody>().AddTorque(new Vector3(0, 0, RotationSpeed), ForceMode.VelocityChange);
     }
 
     void ApplyDamage(int value)
