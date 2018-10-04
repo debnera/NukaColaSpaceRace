@@ -6,6 +6,7 @@ using UnityEngine;
 public class SpaceShip : MonoBehaviour {
 
     public GameObject ship;
+    public float PayloadForce;
     public float SecondsToRestartAfterDeath = 3f;
     public int shields = 1;
     public float RotationSpeed = 100.0f;
@@ -42,8 +43,12 @@ public class SpaceShip : MonoBehaviour {
     public bool IsLanded = true;
     public bool IsAlive = true;
 
+    private FixedJoint LeftJoint;
+    private FixedJoint RightJoint;
     GameObject LeftPackage = null;
     GameObject RightPackage = null;
+
+    private float originalMass;
 
     private GameManager gameManager;
 
@@ -52,6 +57,11 @@ public class SpaceShip : MonoBehaviour {
     {
         initialPosition = transform.position;
         initialRotation = transform.rotation;
+        originalMass = GetComponent<Rigidbody>().mass;
+        
+//        RightJoint = gameObject.AddComponent<FixedJoint>();
+//        LeftJoint = gameObject.AddComponent<FixedJoint>();
+        
     }
     
     void Start ( ) {
@@ -64,10 +74,16 @@ public class SpaceShip : MonoBehaviour {
         destroyedSound = DestroyedSound.GetComponent<AudioSource>();
         landingSound = LandingSound.GetComponent<AudioSource>();
         cargoSound = CargoSound.GetComponent<AudioSource>();
+        
+//        var hpoint = GameObject.Find("HardPoint_Right");
+//        RightJoint.anchor = hpoint.transform.localPosition;
+//        hpoint = GameObject.Find("HardPoint_Left");
+//        LeftJoint.anchor = hpoint.transform.localPosition;
     }
 
     void ResetPosition( )
     {
+        IsLanded = false;
         IsAlive = true;
         transform.position = initialPosition;
         transform.rotation = initialRotation;
@@ -93,9 +109,25 @@ public class SpaceShip : MonoBehaviour {
 	    var rot = transform.rotation.eulerAngles;
 	    rot = new Vector3(0, 0, rot.z);
 	    transform.rotation = Quaternion.Euler(rot);
+	    GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 	    var pos = transform.position;
 	    pos.z = initialPosition.z;
 	    transform.position = pos;
+	    
+	    // Add gravity to payloads
+	    if (LeftPackage)
+	    {
+	        var hpoint = GameObject.Find("HardPoint_Left");
+	        var dir = hpoint.transform.InverseTransformVector(new Vector3(0, 1, 0));
+	        GetComponent<Rigidbody>().AddForceAtPosition(dir * PayloadForce * Time.fixedDeltaTime, hpoint.transform.localPosition);
+	    }
+	    if (RightPackage)
+	    {
+	        var hpoint = GameObject.Find("HardPoint_Right");
+	        var dir = hpoint.transform.InverseTransformVector(new Vector3(0, 1, 0));
+	        GetComponent<Rigidbody>().AddForceAtPosition(dir * PayloadForce * Time.fixedDeltaTime, hpoint.transform.localPosition);
+	    }
+	    
 	    
         // Check input
         if ( Input.GetKey( KeyCode.LeftArrow ) )
@@ -106,18 +138,27 @@ public class SpaceShip : MonoBehaviour {
 
         if (Input.GetKey( KeyCode.Space))
             Fire();
+	    
+	    print(GetComponent<Rigidbody>().centerOfMass);
     }
 
     public void AttachRightPackage( GameObject package ) {
         if (RightPackage != null) return;
         cargoSound.Play();
         var hpoint = GameObject.Find("HardPoint_Right");
+        
         var npackage = Instantiate(package, hpoint.transform);
         npackage.transform.localPosition = Vector3.zero;
         npackage.transform.localScale = Vector3.one;
+//        var joint = hpoint.GetComponent<FixedJoint>();
+//        if (!joint)
+//            joint = hpoint.AddComponent<FixedJoint>();
+//        joint.connectedBody = npackage.GetComponent<Rigidbody>();
+//        npackage.GetComponent<Rigidbody>().isKinematic = false;
         package.SetActive(false);
         Destroy(package);
         RightPackage = npackage;
+        GetComponent<Rigidbody>().ResetCenterOfMass();
     }
 
     public void AttachLeftPackage(GameObject package )
@@ -126,12 +167,17 @@ public class SpaceShip : MonoBehaviour {
         cargoSound.Play();
         var hpoint = GameObject.Find("HardPoint_Left");
         var npackage = Instantiate(package, hpoint.transform);
-        print(npackage);
         npackage.transform.localPosition = Vector3.zero;
         npackage.transform.localScale = Vector3.one;
+//        var joint = hpoint.GetComponent<FixedJoint>();
+//        if (!joint)
+//            joint = hpoint.AddComponent<FixedJoint>();
+//        joint.connectedBody = npackage.GetComponent<Rigidbody>();
+//        npackage.GetComponent<Rigidbody>().isKinematic = false;
         package.SetActive(false);
         Destroy(package);
         LeftPackage = npackage;
+        GetComponent<Rigidbody>().ResetCenterOfMass();
     }
 
     private bool IsLandingOk() {
@@ -183,6 +229,7 @@ public class SpaceShip : MonoBehaviour {
 
     private void OnCollisionStay(Collision other)
     {
+        if (!IsAlive) return;
         if (IsFirstLanding()) landingSound.Play();
 
         IsLanded = IsLandingOk();
@@ -232,14 +279,19 @@ public class SpaceShip : MonoBehaviour {
 
     private void TurnRight( )
     {
-        Quaternion deltaRotation = Quaternion.Euler(-eulerAngleVelocity * Time.fixedDeltaTime);
-        rigidBody.MoveRotation(rigidBody.rotation * deltaRotation);
+//        Quaternion deltaRotation = Quaternion.Euler(-eulerAngleVelocity * Time.fixedDeltaTime);
+//        rigidBody.MoveRotation(rigidBody.rotation * deltaRotation);
+        
+        GetComponent<Rigidbody>().AddTorque(new Vector3(0, 0, -RotationSpeed));
+        //GetComponent<Rigidbody>().AddForceAtPosition(cannon.transform.right * RotationSpeed, cannon.transform.position, );
     }
 
     private void TurnLeft( )
     {
-        Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.fixedDeltaTime);
-        rigidBody.MoveRotation(rigidBody.rotation * deltaRotation);
+//        Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.fixedDeltaTime);
+//        rigidBody.MoveRotation(rigidBody.rotation * deltaRotation);
+        GetComponent<Rigidbody>().AddTorque(new Vector3(0, 0, RotationSpeed));
+        //GetComponent<Rigidbody>().AddForceAtPosition(-cannon.transform.right * RotationSpeed, cannon.transform.position);
     }
 
     void ApplyDamage(int value)
