@@ -48,11 +48,16 @@ public class SpaceShip : MonoBehaviour {
     private GameManager gameManager;
 
     // Use this for initialization
+    void Awake()
+    {
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
+    }
+    
     void Start ( ) {
         rigidBody = GetComponent<Rigidbody>( );
         eulerAngleVelocity = new Vector3( 0, 0, RotationSpeed);
-        initialPosition = transform.position;
-        initialRotation = transform.rotation;
+        
         previousShotTime = Time.time;
         gameManager = GameManager.GetInstance();
         shootingSound = ShootingSound.GetComponent<AudioSource>();
@@ -84,7 +89,15 @@ public class SpaceShip : MonoBehaviour {
             EngineEffect.Play();
         }
             
-
+	    // Fix rotation and z-position drift
+	    var rot = transform.rotation.eulerAngles;
+	    rot = new Vector3(0, 0, rot.z);
+	    transform.rotation = Quaternion.Euler(rot);
+	    var pos = transform.position;
+	    pos.z = initialPosition.z;
+	    transform.position = pos;
+	    
+        // Check input
         if ( Input.GetKey( KeyCode.LeftArrow ) )
             TurnLeft( );
 
