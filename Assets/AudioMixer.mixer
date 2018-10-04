@@ -3,7 +3,7 @@
 --- !u!241 &24100000
 AudioMixerController:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: AudioMixer
   m_OutputGroup: {fileID: 0}
@@ -15,9 +15,7 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters:
-  - guid: 55590641b4c474af29f83703f4a94248
-    name: rocketCutoff
+  m_ExposedParameters: []
   m_AudioMixerGroupViews:
   - guids:
     - 20d0f43e53cc047108c4f42cf047ff8a
@@ -29,7 +27,7 @@ AudioMixerController:
 --- !u!243 &24300002
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Master
   m_AudioMixer: {fileID: 24100000}
@@ -48,7 +46,7 @@ AudioMixerGroupController:
 --- !u!244 &24400004
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_EffectID: e7c47ae8e6fc14dbfb08f3b2a6cf622d
@@ -61,7 +59,7 @@ AudioMixerEffectController:
 --- !u!245 &24500006
 AudioMixerSnapshotController:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: thrustOn
   m_AudioMixer: {fileID: 24100000}
@@ -74,7 +72,7 @@ AudioMixerSnapshotController:
 --- !u!243 &243627786103154178
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: RocketThrust
   m_AudioMixer: {fileID: 24100000}
@@ -84,7 +82,6 @@ AudioMixerGroupController:
   m_Pitch: 610395198de2b4fb1b766b9cdd8ae5ab
   m_Effects:
   - {fileID: 244678719053525096}
-  - {fileID: 244319768019882224}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -92,7 +89,7 @@ AudioMixerGroupController:
 --- !u!243 &243664101079081060
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: PlayerShoot
   m_AudioMixer: {fileID: 24100000}
@@ -109,7 +106,7 @@ AudioMixerGroupController:
 --- !u!244 &244022807640453992
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_EffectID: b5820838bb8ae469e90a19b87efb1710
@@ -119,27 +116,10 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
---- !u!244 &244319768019882224
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_EffectID: c2171e374721841e3a48d98b1a5be781
-  m_EffectName: Lowpass
-  m_MixLevel: 1232072dba49548bab304c4475f53b4d
-  m_Parameters:
-  - m_ParameterName: Cutoff freq
-    m_GUID: 55590641b4c474af29f83703f4a94248
-  - m_ParameterName: Resonance
-    m_GUID: dfe9b21c8d4a34617b379a32d0306742
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
 --- !u!244 &244678719053525096
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_EffectID: c2792446342ad405488489d15319ab5c
@@ -152,7 +132,7 @@ AudioMixerEffectController:
 --- !u!245 &245247255689731100
 AudioMixerSnapshotController:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: thrustOff
   m_AudioMixer: {fileID: 24100000}
