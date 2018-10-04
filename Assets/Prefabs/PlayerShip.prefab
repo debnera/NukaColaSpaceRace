@@ -327,7 +327,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1084527026830448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.61, z: 2.8}
+  m_LocalPosition: {x: 0, y: -0.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4230223108236020}
@@ -445,7 +445,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1186624934016022}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 14.53, z: 0}
+  m_LocalPosition: {x: 0, y: 3.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4192011315984370}
@@ -772,7 +772,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -787,19 +787,19 @@ AudioSource:
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 0
+      value: 0.993042
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   panLevelCustomCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -817,7 +817,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -843,7 +843,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: cb975635fed014ff5bd3130b1a5573a9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.785
-  m_Pitch: 1.72
+  m_Pitch: 1.03
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -853,7 +853,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -868,19 +868,19 @@ AudioSource:
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 0
+      value: 0.9854126
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   panLevelCustomCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -898,7 +898,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -933,7 +933,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -942,25 +942,25 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 1
+      value: 0.9961815
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      value: 1.0083351
+      inSlope: 0.088254906
+      outSlope: 0.088254906
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   panLevelCustomCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -978,7 +978,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1013,7 +1013,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1028,19 +1028,19 @@ AudioSource:
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 0
+      value: 0.9968872
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   panLevelCustomCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1058,7 +1058,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1081,7 +1081,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243627786103154178, guid: aed610aa752854818af5326ed486d3b7,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: ff45ab06fc0e54a98bc524d922bc8cff, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 710cf1f46dd9c44299c186d1f6ad67db, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.956
   m_Pitch: 1
@@ -1094,7 +1094,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 1
@@ -1109,19 +1109,19 @@ AudioSource:
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 0
+      value: 1.004509
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   panLevelCustomCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1139,7 +1139,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1185,11 +1185,19 @@ MonoBehaviour:
   Force: 2000
   projectilePrefab: {fileID: 54133281265602614, guid: d3c6fbe2cf2c99347bc42837acef37be,
     type: 2}
-  projectileSpeed: 100
+  projectileSpeed: 50
   ShootingSound: {fileID: 1190078119823410}
   DestroyedSound: {fileID: 1622222084553714}
   LandingSound: {fileID: 1654885429686938}
   CargoSound: {fileID: 1715445204126150}
+  shootingclips:
+  - {fileID: 8300000, guid: 665d7b392cb5d4ad0b0d63b3d19538e8, type: 3}
+  - {fileID: 8300000, guid: 4057f3d07f19e4b89963494b2da8223b, type: 3}
+  - {fileID: 8300000, guid: cb975635fed014ff5bd3130b1a5573a9, type: 3}
+  - {fileID: 8300000, guid: ef14d4adde4ed43aaaf97dfb43c673b4, type: 3}
+  - {fileID: 8300000, guid: caa36ffbbd2ec4672b9a96ff2a67d11a, type: 3}
+  - {fileID: 8300000, guid: 931b012c0eb3e4fa2ac55d2e775c09e4, type: 3}
+  - {fileID: 8300000, guid: cce0ea56fe0474440a917215d8bcc3df, type: 3}
   MaxLandingAngle: 15
   MaxLandingSpeed: 10
   cannon: {fileID: 1186624934016022}
@@ -1319,7 +1327,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 165264784
@@ -4683,7 +4691,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -958758732
+  randomSeed: 2094086995
   InitialModule:
     serializedVersion: 3
     enabled: 1
