@@ -16,6 +16,16 @@ public class EnemyShip : MonoBehaviour
     public Rigidbody projectilePrefab;
     public GameObject movementEndPoint;
 
+    public GameObject FlyingSound;
+    public GameObject ShootingSound;
+    public GameObject HitSound;
+    public GameObject DestroyedSound;
+
+    private AudioSource FlyingSource;
+    private AudioSource ShootingSource;
+    private AudioSource HitSource;
+    private AudioSource DestroyedSource;
+
     private Vector3 startPoint;
     private Vector3 endPoint;
 
@@ -25,17 +35,23 @@ public class EnemyShip : MonoBehaviour
     private bool alive = true;
     private GameObject player;
 
-	// Use this for initialization
-	void Start ()
+    private void Awake()
+    {
+        FlyingSource = FlyingSound.GetComponent<AudioSource>();
+        ShootingSource = ShootingSound.GetComponent<AudioSource>();
+        HitSource = HitSound.GetComponent<AudioSource>();
+        DestroyedSource = DestroyedSound.GetComponent<AudioSource>();
+    }
+
+    // Use this for initialization
+    void Start( )
 	{
 	    startPoint = transform.position;
 	    endPoint = movementEndPoint.transform.position;
 	    movementEndPoint.SetActive(false);
 	    previousShotTime = Time.time;
 	    player = FindObjectOfType<SpaceShip>().gameObject;
-
-	}
-	
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate ()
@@ -62,7 +78,7 @@ public class EnemyShip : MonoBehaviour
             //Rigidbody projectile = Instantiate(projectilePrefab, transform.position, Quaternion.Euler(0, 0, shootingAngle));
 	        Rigidbody projectile = Instantiate(projectilePrefab, transform.position, GetShootingQuaternion());
             projectile.GetComponent<Projectile>().SetToIgnoreEnemyCollisions();  // Enemies cannot kill enemies
-	        //shootingAngle += degreesBetweenShots;
+            ShootingSource.Play();
         }
     }
 
@@ -95,6 +111,8 @@ public class EnemyShip : MonoBehaviour
     void ApplyDamage(int value)
     {
         shields -= value;
+
+        HitSource.Play();
         if (shields <= 0 && alive)
         {
             Die();
@@ -109,8 +127,10 @@ public class EnemyShip : MonoBehaviour
             ParticleSystem pSystem = Instantiate(deathParticleSystem, transform.position, transform.rotation);
             pSystem.Play();
         }
+        FlyingSource.Stop();
+        DestroyedSource.Play();
         FindObjectOfType<GameManager>().AddToScore(reward);
-        Destroy(gameObject);
+        Destroy(gameObject, 1);
     }
 
     void OnCollisionEnter(Collision collision)

@@ -121,7 +121,7 @@ public class SpaceShip : MonoBehaviour {
         LeftPackage = npackage;
     }
 
-    private bool IsLandingOk() {
+    private bool IsLandingVelocityOk() {
         var angle = initialRotation.eulerAngles.z - rigidBody.rotation.eulerAngles.z;
         return rigidBody.velocity.magnitude < MaxLandingSpeed && angle < MaxLandingAngle;
     }
@@ -165,14 +165,19 @@ public class SpaceShip : MonoBehaviour {
     }
 
     private bool IsFirstLanding() {
-        return (IsLanded == false && IsLandingOk());
+        return (IsLanded == false && IsLandingVelocityOk());
+    }
+
+    private bool IsPlatform(Collision other ) {
+        return other.gameObject.GetComponent<HomePlatform>() || other.gameObject.GetComponent<PayloadPlatform>();
     }
 
     private void OnCollisionStay(Collision other)
     {
-        if (IsFirstLanding()) landingSound.Play();
+        if (!IsAlive) return;
+        if (IsFirstLanding() && IsPlatform(other)) landingSound.Play();
 
-        IsLanded = IsLandingOk();
+        IsLanded = IsLandingVelocityOk();
         if ( other.gameObject.GetComponent<HomePlatform>() && IsLanded ) {
             Debug.Log( "Landing OK" );
 

@@ -152,14 +152,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 19
       objectReference: {fileID: 0}
-    - target: {fileID: 4738412376091652, guid: de45f7fdbd0a7414db3f64416bac0905, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 4.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738412376091652, guid: de45f7fdbd0a7414db3f64416bac0905, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.26
-      objectReference: {fileID: 0}
+    - target: {fileID: 114208416671633326, guid: de45f7fdbd0a7414db3f64416bac0905,
+        type: 2}
+      propertyPath: deathParticleSystem
+      value: 
+      objectReference: {fileID: 154966176}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de45f7fdbd0a7414db3f64416bac0905, type: 2}
   m_IsPrefabParent: 0
@@ -229,6 +226,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9519730d8a6ba2b4ebaa9aaa5e5128ce, type: 3}
   m_IsPrefabParent: 0
+--- !u!198 &154966176 stripped
+ParticleSystem:
+  m_PrefabParentObject: {fileID: 198312726710077834, guid: ceba479d1866f814983c0dba20fbcb8b,
+    type: 2}
+  m_PrefabInternal: {fileID: 866571601}
 --- !u!1001 &179324340
 Prefab:
   m_ObjectHideFlags: 0
@@ -568,6 +570,42 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9519730d8a6ba2b4ebaa9aaa5e5128ce, type: 3}
   m_IsPrefabParent: 0
+--- !u!1 &322176512
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 322176513}
+  - component: {fileID: 322176514}
+  m_Layer: 0
+  m_Name: AudioListener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &322176513
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 322176512}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 150}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1919431194}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &322176514
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 322176512}
+  m_Enabled: 1
 --- !u!1001 &340682973
 Prefab:
   m_ObjectHideFlags: 0
@@ -756,14 +794,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 31
       objectReference: {fileID: 0}
-    - target: {fileID: 4738412376091652, guid: de45f7fdbd0a7414db3f64416bac0905, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 4.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738412376091652, guid: de45f7fdbd0a7414db3f64416bac0905, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.26
-      objectReference: {fileID: 0}
+    - target: {fileID: 114208416671633326, guid: de45f7fdbd0a7414db3f64416bac0905,
+        type: 2}
+      propertyPath: deathParticleSystem
+      value: 
+      objectReference: {fileID: 154966176}
     - target: {fileID: 1925426518148674, guid: de45f7fdbd0a7414db3f64416bac0905, type: 2}
       propertyPath: m_Name
       value: EnemyUFO (1)
@@ -1041,6 +1076,11 @@ Prefab:
     - target: {fileID: 4192011315984370, guid: 780d9ea38c58fec41ba4c8067f980c6b, type: 2}
       propertyPath: m_RootOrder
       value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 82372046423332940, guid: 780d9ea38c58fec41ba4c8067f980c6b,
+        type: 2}
+      propertyPath: rolloffMode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 780d9ea38c58fec41ba4c8067f980c6b, type: 2}
@@ -4126,7 +4166,6 @@ GameObject:
   - component: {fileID: 1919431193}
   - component: {fileID: 1919431192}
   - component: {fileID: 1919431191}
-  - component: {fileID: 1919431190}
   - component: {fileID: 1919431195}
   m_Layer: 0
   m_Name: Main Camera
@@ -4135,13 +4174,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1919431190
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1919431189}
-  m_Enabled: 1
 --- !u!124 &1919431191
 Behaviour:
   m_ObjectHideFlags: 0
@@ -4201,7 +4233,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: -150}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 322176513}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
