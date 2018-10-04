@@ -130,7 +130,7 @@ public class EnemyShip : MonoBehaviour
         FlyingSource.Stop();
         DestroyedSource.Play();
         FindObjectOfType<GameManager>().AddToScore(reward);
-        Destroy(gameObject, 1);
+        Destroy(gameObject, 2.3f);
     }
 
     void OnCollisionEnter(Collision collision)

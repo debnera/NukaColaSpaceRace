@@ -12,10 +12,13 @@ public class Magnet : MonoBehaviour
     public float strength;
     public bool visualizeRadius;
 
+    AudioSource magnetSound;
+
     private GameObject visualizer;
 
     // Use this for initialization
     void Start () { 
+        magnetSound = GetComponent<AudioSource>();
         if (visualizeRadius)
         {
             AddVisualization();
@@ -55,12 +58,14 @@ public class Magnet : MonoBehaviour
         active = !active;
         if (active)
         {
+            magnetSound.Play();
             GetComponent<MeshRenderer>().material.color = Color.green;
             SetVisualizerColor(Color.green);
             Invoke("Toggle", timeOn);
         }
         else
         {
+            magnetSound.Stop();
             GetComponent<MeshRenderer>().material.color = Color.gray;
             SetVisualizerColor(Color.gray);
             Invoke("Toggle", timeOff);
