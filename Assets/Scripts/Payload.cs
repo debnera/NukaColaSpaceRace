@@ -10,7 +10,7 @@ public class Payload : MonoBehaviour {
 	public bool TryAttachPayload(GameObject target)
 	{
 		SpaceShip player = target.GetComponent<SpaceShip>();
-		if (player && player.IsLanded)
+		if (player && player.IsLanded && player.IsAlive)
 		{
 			if (isLeftPackage)
 				player.AttachLeftPackage(gameObject);
