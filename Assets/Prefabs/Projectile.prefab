@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 4344431592752100}
   - component: {fileID: 82748933840880394}
   m_Layer: 0
-  m_Name: WallAudio
+  m_Name: GroundAudio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -316,9 +316,7 @@ MonoBehaviour:
   maxSecondsAlive: 10
   collisionParticleSystem: {fileID: 198276074192485538, guid: c8f3047e247cd3f428d9bd7c39ca7d34,
     type: 2}
-  wallHitParticleSystem: {fileID: 198941274575549034, guid: 141c0b55c44b15247976918297763427,
-    type: 2}
-  wallHitAudioSource: {fileID: 82748933840880394}
+  groundHitAudioSource: {fileID: 82748933840880394}
 --- !u!135 &135478581158136010
 SphereCollider:
   m_ObjectHideFlags: 1
