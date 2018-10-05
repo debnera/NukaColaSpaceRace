@@ -23,7 +23,7 @@ public class thrustAudio : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow) && gameObject.GetComponent<SpaceShip>().IsAlive)
             thrustOn.TransitionTo(0.001f);
         else thrustOff.TransitionTo(0.35f);
         
