@@ -327,7 +327,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1084527026830448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.52, y: 10, z: 0}
+  m_LocalPosition: {x: 0, y: -0.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4230223108236020}
@@ -1083,7 +1083,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 710cf1f46dd9c44299c186d1f6ad67db, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.956
+  m_Volume: 0.79
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1201,7 +1201,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 931b012c0eb3e4fa2ac55d2e775c09e4, type: 3}
   - {fileID: 8300000, guid: cce0ea56fe0474440a917215d8bcc3df, type: 3}
   MaxLandingAngle: 15
-  MaxLandingSpeed: 10
+  MaxLandingSpeed: 0.1
   cannon: {fileID: 1186624934016022}
   EngineEffect: {fileID: 198456044272992464}
   rateOfFire: 5
@@ -1279,11 +1279,11 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1255706973297920}
   serializedVersion: 5
-  lengthInSec: 0.2
-  simulationSpeed: 1
+  lengthInSec: 5
+  simulationSpeed: 2
   stopAction: 0
-  looping: 1
-  prewarm: 1
+  looping: 0
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -1339,7 +1339,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5
+      scalar: 5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1380,7 +1380,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 4.5
+      scalar: 4
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1420,13 +1420,13 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 1
       minColor: {r: 1, g: 1, b: 1, a: 1}
       maxColor: {r: 0.882648, g: 0.89510554, b: 0.897, a: 0.146}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
+        key0: {r: 0.8897059, g: 0.8025309, b: 0.71307313, a: 0.9019608}
+        key1: {r: 0.102941155, g: 0.08838741, b: 0.07720587, a: 0.69411767}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1484,7 +1484,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.8
+      scalar: 0.08
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1728,7 +1728,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 200
+    maxNumParticles: 2000
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -1892,7 +1892,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 2
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1933,7 +1933,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1978,7 +1978,7 @@ ParticleSystem:
     curve:
       serializedVersion: 2
       minMaxState: 1
-      scalar: 10
+      scalar: 50
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -2234,7 +2234,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
+        key0: {r: 1, g: 1, b: 1, a: 0.22745098}
         key1: {r: 1, g: 1, b: 1, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -4641,10 +4641,10 @@ ParticleSystem:
   m_GameObject: {fileID: 1591494095554066}
   serializedVersion: 5
   lengthInSec: 0.2
-  simulationSpeed: 1
+  simulationSpeed: 5
   stopAction: 0
-  looping: 1
-  prewarm: 1
+  looping: 0
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -4693,7 +4693,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -750590534
+  randomSeed: -1185118320
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4845,7 +4845,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.8
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
