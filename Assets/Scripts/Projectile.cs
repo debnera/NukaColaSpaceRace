@@ -7,8 +7,7 @@ public class Projectile : MonoBehaviour
     public float speed = 10f;
     public float maxSecondsAlive = 10f;
     public ParticleSystem collisionParticleSystem;
-    public ParticleSystem wallHitParticleSystem;
-    public AudioSource wallHitAudioSource;
+    public AudioSource groundHitAudioSource;
 
     // Use this for initialization
     void Start ( )
@@ -47,27 +46,18 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (IsWall(collision.gameObject))
+        var go = new GameObject();
+        Destroy(go, 5f);
+        go.transform.position = transform.position;
+        if (IsWall(collision.gameObject) && groundHitAudioSource)
         {
-            var go = new GameObject();
-            Destroy(go, 5f);
-            go.transform.position = transform.position;
-            if (wallHitParticleSystem)
-            {
-                ParticleSystem pSystem = Instantiate(wallHitParticleSystem, go.transform);
-                pSystem.Play();
-            }
-
-            if (wallHitAudioSource)
-            {
-                AudioSource audio = Instantiate(wallHitAudioSource, go.transform);
-                audio.Play();
-            }
+            AudioSource audio = Instantiate(groundHitAudioSource, go.transform);
+            audio.Play();
         }
 
-        else if (collisionParticleSystem != null)
+        if (collisionParticleSystem != null)
         {
-            ParticleSystem pSystem = Instantiate(collisionParticleSystem, transform.position, transform.rotation);
+            ParticleSystem pSystem = Instantiate(collisionParticleSystem, go.transform);
             pSystem.Play();
         }
         collision.gameObject.SendMessageUpwards("ApplyDamage", 1, SendMessageOptions.DontRequireReceiver);
