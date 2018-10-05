@@ -38,6 +38,7 @@ public class EnemyShip : MonoBehaviour
     private Vector3 lastCollisionPoint;
     public float DeathExplosionForce = 10f;
     public float SecondsVisibleAfterDeath = 10000000f;
+    public bool DeadUfoCollidesWithPlayer = false;
 
     private void Awake()
     {
@@ -147,13 +148,31 @@ public class EnemyShip : MonoBehaviour
 
     void JettisonAttachedPart(GameObject obj)
     {
+        // Add rigidbody if it doesn't exist
         var rbody = obj.GetComponent<Rigidbody>();
         if (!rbody)
             rbody = obj.AddComponent<Rigidbody>();
 
-        var dir = lastCollisionPoint - transform.position;
-        //gameObject.layer = LayerMask.NameToLayer("Player"); // Dead ufo cant collide with player
         // Add some force at last collision point to make the ufo to look like it was actually hit by something
-        rbody.AddForceAtPosition(dir * DeathExplosionForce, lastCollisionPoint); 
+        var dir = lastCollisionPoint - transform.position;
+        rbody.AddForceAtPosition(dir * DeathExplosionForce, lastCollisionPoint);
+
+        // Disable collision between player and ufo
+        if (!DeadUfoCollidesWithPlayer)
+        {
+            //gameObject.layer = LayerMask.NameToLayer("Player");
+            var player = FindObjectOfType<SpaceShip>();
+            if (player)
+            {
+                var colliders = player.GetComponents<Collider>();
+                foreach (var collider in colliders)
+                {
+                    Physics.IgnoreCollision(collider, GetComponent<Collider>());
+                }
+            }
+        }
+            
+
+        
     }
 }
