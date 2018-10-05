@@ -35,6 +35,10 @@ public class EnemyShip : MonoBehaviour
     private bool alive = true;
     private GameObject player;
 
+    private Vector3 lastCollisionPoint;
+    public float DeathExplosionForce = 10f;
+    public float SecondsVisibleAfterDeath = 10000000f;
+
     private void Awake()
     {
         FlyingSource = FlyingSound.GetComponent<AudioSource>();
@@ -130,12 +134,26 @@ public class EnemyShip : MonoBehaviour
         FlyingSource.Stop();
         DestroyedSource.Play();
         FindObjectOfType<GameManager>().AddToScore(reward);
-        Destroy(gameObject, DestroyedSource.clip.length);
+        Destroy(gameObject, SecondsVisibleAfterDeath);
+        JettisonAttachedPart(gameObject);
     }
 
     void OnCollisionEnter(Collision collision)
     {
         // Cause enough damage to kill anything on collision
         collision.gameObject.SendMessageUpwards("ApplyDamage", 1000, SendMessageOptions.DontRequireReceiver);
+        lastCollisionPoint = collision.contacts[0].point;
+    }
+
+    void JettisonAttachedPart(GameObject obj)
+    {
+        var rbody = obj.GetComponent<Rigidbody>();
+        if (!rbody)
+            rbody = obj.AddComponent<Rigidbody>();
+
+        var dir = lastCollisionPoint - transform.position;
+        //gameObject.layer = LayerMask.NameToLayer("Player"); // Dead ufo cant collide with player
+        // Add some force at last collision point to make the ufo to look like it was actually hit by something
+        rbody.AddForceAtPosition(dir * DeathExplosionForce, lastCollisionPoint); 
     }
 }
