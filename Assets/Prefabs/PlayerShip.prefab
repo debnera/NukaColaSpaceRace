@@ -1181,7 +1181,7 @@ MonoBehaviour:
   ship: {fileID: 1084527026830448}
   PayloadForceMultiplier: 0.3
   PayloadTorqueOffset: 1
-  SecondsToRestartAfterDeath: 3
+  SecondsToRestartAfterDeath: 20
   shields: 1
   RotationSpeed: 3
   Force: 2000
