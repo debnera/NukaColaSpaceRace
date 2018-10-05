@@ -121,7 +121,7 @@ public class SpaceShip : MonoBehaviour {
             forcePos = transform.TransformPoint(forcePos);
             GetComponent<Rigidbody>().AddForceAtPosition(dir * Force * payloadMultiplier * Time.fixedDeltaTime, forcePos);
             //rigidBody.AddForceAtPosition(transform.up * Force * Time.fixedDeltaTime);
-            Debug.DrawRay(forcePos, dir * 100);
+            //Debug.DrawRay(forcePos, dir * 100);
             EngineEffect.Play();
 
         }
@@ -145,7 +145,7 @@ public class SpaceShip : MonoBehaviour {
         if (Input.GetKey( KeyCode.Space))
             Fire();
 	    
-	    print(GetComponent<Rigidbody>().centerOfMass);
+	    //print(GetComponent<Rigidbody>().centerOfMass);
     }
 
 
@@ -211,7 +211,7 @@ public class SpaceShip : MonoBehaviour {
         // Handle unsafe collisions
         if (!IsCollisionSafe(other))
         {
-            Debug.Log( "Landing Failed" );
+            //Debug.Log( "Landing Failed" );
             Die();
             return;
         }
@@ -233,7 +233,7 @@ public class SpaceShip : MonoBehaviour {
 
         IsLanded = IsLandingVelocityOk();
         if ( other.gameObject.GetComponent<HomePlatform>() && IsLanded ) {
-            Debug.Log( "Landing OK" );
+            //Debug.Log( "Landing OK" );
 
             if (LeftPackage)
             {

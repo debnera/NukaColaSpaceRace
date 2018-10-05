@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     void UpdateUI()
     {
         livesText.text = livesLeft.ToString();
-        fuelText.text = 100.ToString(); // TODO: Implement me
+        //fuelText.text = 100.ToString(); // TODO: Implement me
         cargoText.text = string.Format("{0} / {1}", cargoCollected, cargoTotal);
         scoreText.text = playerScore.ToString();
         var time = DateTime.Now - startTime;
