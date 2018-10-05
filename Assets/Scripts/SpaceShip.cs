@@ -50,6 +50,7 @@ public class SpaceShip : MonoBehaviour {
     GameObject RightPackage = null;
 
     private float originalMass;
+    private float landingSoundPreviousPlay;
 
     private GameManager gameManager;
 
@@ -84,6 +85,7 @@ public class SpaceShip : MonoBehaviour {
 
     void ResetPosition( )
     {
+        CancelInvoke("ResetPosition"); // Avoid resetting multiple times
         IsLanded = false;
         IsAlive = true;
 
@@ -108,7 +110,15 @@ public class SpaceShip : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate ( )
 	{
-	    if (!IsAlive) return;
+	    if (!IsAlive)
+	    {
+
+	        if (Input.GetKey(KeyCode.Space))
+                ResetPosition();
+            else if (GetComponent<Rigidbody>().velocity.magnitude < MaxLandingSpeed && GetComponent<Rigidbody>().angularVelocity.magnitude < MaxLandingSpeed)
+	            Invoke("ResetPosition", 2f);  // Player stopped moving - add a few seconds for dramatic effect
+            return;
+	    }
 
         //update camera position
         //mainCamera.transform.position.Set(transform.position.x, transform.position.y, mainCamera.transform.position.z);
@@ -241,10 +251,19 @@ public class SpaceShip : MonoBehaviour {
         return other.gameObject.GetComponent<HomePlatform>() || other.gameObject.GetComponent<PayloadPlatform>();
     }
 
+    private void PlayLandingSound()
+    {
+        if (Time.time - landingSoundPreviousPlay > 2f)
+        {
+            landingSoundPreviousPlay = Time.time;
+            landingSound.Play();
+        }
+    }
+
     private void OnCollisionStay(Collision other)
     {
         if (!IsAlive) return;
-        if (IsFirstLanding() && IsPlatform(other)) landingSound.Play();
+        if (IsFirstLanding() && IsPlatform(other)) PlayLandingSound();
 
         IsLanded = IsLandingVelocityOk();
         if ( other.gameObject.GetComponent<HomePlatform>() && IsLanded ) {
