@@ -7,6 +7,7 @@ public class Magnet : MonoBehaviour
 
     public float timeOn;
     public float timeOff;
+    public float timeStart;
     public bool active;
     public float radius;
     public float strength;
@@ -17,13 +18,13 @@ public class Magnet : MonoBehaviour
     private GameObject visualizer;
 
     // Use this for initialization
-    void Start () { 
+    void Start () {
         magnetSound = GetComponent<AudioSource>();
         if (visualizeRadius)
         {
             AddVisualization();
         }
-        Toggle();
+        Invoke("Toggle", timeStart);
     }
 	
 	// Update is called once per frame

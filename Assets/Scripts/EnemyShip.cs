@@ -130,7 +130,7 @@ public class EnemyShip : MonoBehaviour
         FlyingSource.Stop();
         DestroyedSource.Play();
         FindObjectOfType<GameManager>().AddToScore(reward);
-        Destroy(gameObject, 2.3f);
+        Destroy(gameObject, DestroyedSource.clip.length);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -138,5 +138,4 @@ public class EnemyShip : MonoBehaviour
         // Cause enough damage to kill anything on collision
         collision.gameObject.SendMessageUpwards("ApplyDamage", 1000, SendMessageOptions.DontRequireReceiver);
     }
-
 }
