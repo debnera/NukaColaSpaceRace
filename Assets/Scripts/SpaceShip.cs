@@ -314,5 +314,24 @@ public class SpaceShip : MonoBehaviour {
         Invoke("ResetPosition", SecondsToRestartAfterDeath);
         // TODO: Play death animation
         destroyedSound.Play();
+
+        if (LeftPackage)
+        {
+            JettisonAttachedPart(LeftPackage);
+        }
+        if (RightPackage)
+        {
+            JettisonAttachedPart(RightPackage);
+        }
+    }
+
+    void JettisonAttachedPart(GameObject obj)
+    {
+        var rbody = obj.GetComponent<Rigidbody>();
+        if (!rbody)
+            obj.AddComponent<Rigidbody>();
+        var collider = obj.GetComponent<Collider>();
+        if (collider)
+            collider.isTrigger = false;
     }
 }
