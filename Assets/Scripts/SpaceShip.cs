@@ -50,6 +50,7 @@ public class SpaceShip : MonoBehaviour {
     GameObject RightPackage = null;
 
     private float originalMass;
+    private float landingSoundPreviousPlay;
 
     private GameManager gameManager;
 
@@ -250,10 +251,19 @@ public class SpaceShip : MonoBehaviour {
         return other.gameObject.GetComponent<HomePlatform>() || other.gameObject.GetComponent<PayloadPlatform>();
     }
 
+    private void PlayLandingSound()
+    {
+        if (Time.time - landingSoundPreviousPlay > 2f)
+        {
+            landingSoundPreviousPlay = Time.time;
+            landingSound.Play();
+        }
+    }
+
     private void OnCollisionStay(Collision other)
     {
         if (!IsAlive) return;
-        if (IsFirstLanding() && IsPlatform(other)) landingSound.Play();
+        if (IsFirstLanding() && IsPlatform(other)) PlayLandingSound();
 
         IsLanded = IsLandingVelocityOk();
         if ( other.gameObject.GetComponent<HomePlatform>() && IsLanded ) {
