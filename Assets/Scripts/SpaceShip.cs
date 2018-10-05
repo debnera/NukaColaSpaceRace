@@ -86,6 +86,19 @@ public class SpaceShip : MonoBehaviour {
     {
         IsLanded = false;
         IsAlive = true;
+
+        if (LeftPackage)
+        {
+            LeftPackage.GetComponent<Payload>().ResetToPlatform();
+            LeftPackage = null;
+        }
+        if (RightPackage)
+        {
+            RightPackage.GetComponent<Payload>().ResetToPlatform();
+            RightPackage = null;
+        }
+
+
         transform.position = initialPosition;
         transform.rotation = initialRotation;
         rigidBody.angularVelocity = new Vector3( );
@@ -157,8 +170,9 @@ public class SpaceShip : MonoBehaviour {
         var npackage = Instantiate(package, hpoint.transform);
         npackage.transform.localPosition = Vector3.zero;
         npackage.transform.localScale = Vector3.one;
-        package.SetActive(false);
-        Destroy(package);
+        npackage.GetComponent<Payload>().SetOwnerPlatform(package.GetComponent<Payload>().GetOwnerPlatform());
+        //package.SetActive(false);
+        //Destroy(package);
         RightPackage = npackage;
     }
 
@@ -170,8 +184,9 @@ public class SpaceShip : MonoBehaviour {
         var npackage = Instantiate(package, hpoint.transform);
         npackage.transform.localPosition = Vector3.zero;
         npackage.transform.localScale = Vector3.one;
-        package.SetActive(false);
-        Destroy(package);
+        npackage.GetComponent<Payload>().SetOwnerPlatform(package.GetComponent<Payload>().GetOwnerPlatform());
+        //package.SetActive(false);
+        //Destroy(package);
         LeftPackage = npackage;
     }
 
@@ -299,5 +314,24 @@ public class SpaceShip : MonoBehaviour {
         Invoke("ResetPosition", SecondsToRestartAfterDeath);
         // TODO: Play death animation
         destroyedSound.Play();
+
+        if (LeftPackage)
+        {
+            JettisonAttachedPart(LeftPackage);
+        }
+        if (RightPackage)
+        {
+            JettisonAttachedPart(RightPackage);
+        }
+    }
+
+    void JettisonAttachedPart(GameObject obj)
+    {
+        var rbody = obj.GetComponent<Rigidbody>();
+        if (!rbody)
+            obj.AddComponent<Rigidbody>();
+        var collider = obj.GetComponent<Collider>();
+        if (collider)
+            collider.isTrigger = false;
     }
 }

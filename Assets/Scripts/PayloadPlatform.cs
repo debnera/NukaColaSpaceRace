@@ -18,11 +18,16 @@ public class PayloadPlatform : MonoBehaviour
 	
 	private void OnCollisionStay(Collision other)
 	{
-		if (payload)
+		if (payload.gameObject.activeSelf)
 		{
-			bool success = payload.TryAttachPayload(other.gameObject);
+			bool success = payload.TryAttachPayload(other.gameObject, this);
 			if (success) 
-				payload = null;
+				payload.gameObject.SetActive(false);
 		}
 	}
+
+    public void Reset()
+    {
+        payload.gameObject.SetActive(true);
+    }
 }
