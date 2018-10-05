@@ -22,6 +22,7 @@ AudioMixerController:
     - 646b147ca9f704460a1e9ff5388e974e
     - 19b10c637f75c4bc1a13edf733bfecee
     - 5bdb4b4c2977447799c9069e83f51398
+    - b2abf386dce844117ac420370fd963db
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 245247255689731100}
@@ -37,6 +38,7 @@ AudioMixerGroupController:
   - {fileID: 243627786103154178}
   - {fileID: 243664101079081060}
   - {fileID: 243322849498925486}
+  - {fileID: 243004041666541406}
   m_Volume: 9dca76d3a51894fbdae6de3ec5b275ea
   m_Pitch: 3f7d4761b4a544b589e0663951b64b84
   m_Effects:
@@ -71,6 +73,24 @@ AudioMixerSnapshotController:
     4b113ae0cc58343388e2e39b2925fb07: -7.436929
     c9d9c0dae48d542dfa0e0797cd8bfab4: 13799
   m_TransitionOverrides: {}
+--- !u!243 &243004041666541406
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: UFO flanger
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: b2abf386dce844117ac420370fd963db
+  m_Children: []
+  m_Volume: 020ef73d871b64b25864c67335fbf9bd
+  m_Pitch: ac372ad8e7e0e445d903ff57481ad1e1
+  m_Effects:
+  - {fileID: 244186941083581068}
+  - {fileID: 244368890506612200}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!243 &243322849498925486
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -135,6 +155,40 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &244186941083581068
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 737dc08d1f15f4fc9bc00ca157777c94
+  m_EffectName: Attenuation
+  m_MixLevel: c444068d656174d4fabf92cd1495d2f4
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &244368890506612200
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 1815e8e82b6ba41b081b877bbd9b5380
+  m_EffectName: Flange
+  m_MixLevel: 2e445f820c8a641caaae43dfe04460af
+  m_Parameters:
+  - m_ParameterName: Drymix
+    m_GUID: c37f677f1abda4f51800676c5e1c9f81
+  - m_ParameterName: Wetmix
+    m_GUID: 7d2dfb85dbbac400f86ae0b984abbe5c
+  - m_ParameterName: Depth
+    m_GUID: a104b731dbde340d7acf20f55f2a4d96
+  - m_ParameterName: Rate
+    m_GUID: 4a196bc7fef5a478faa6ff0440e30234
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &244678719053525096
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -174,8 +228,11 @@ AudioMixerSnapshotController:
     4b113ae0cc58343388e2e39b2925fb07: -80
     de35fd31eed604044bcbd4d2b6e5a185: 1.3
     55590641b4c474af29f83703f4a94248: 22000
+    7d2dfb85dbbac400f86ae0b984abbe5c: 0.632
+    4a196bc7fef5a478faa6ff0440e30234: 0.2
     97490b5a9ac6c47339fe7dec3dcde404: 3.704152
     c9d9c0dae48d542dfa0e0797cd8bfab4: 261
     dfe9b21c8d4a34617b379a32d0306742: 1.43
+    c37f677f1abda4f51800676c5e1c9f81: 0.42400002
     0ef0af7fcf31345efbac28960c5119ba: 21
   m_TransitionOverrides: {}

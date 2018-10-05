@@ -296,6 +296,18 @@ Prefab:
       propertyPath: BypassReverbZones
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 82104916444015582, guid: de45f7fdbd0a7414db3f64416bac0905,
+        type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 243004041666541406, guid: aed610aa752854818af5326ed486d3b7,
+        type: 2}
+    - target: {fileID: 82176333743376202, guid: de45f7fdbd0a7414db3f64416bac0905,
+        type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 243004041666541406, guid: aed610aa752854818af5326ed486d3b7,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de45f7fdbd0a7414db3f64416bac0905, type: 2}
   m_IsPrefabParent: 0
@@ -1082,6 +1094,18 @@ Prefab:
       propertyPath: DopplerLevel
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 82176333743376202, guid: de45f7fdbd0a7414db3f64416bac0905,
+        type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 243004041666541406, guid: aed610aa752854818af5326ed486d3b7,
+        type: 2}
+    - target: {fileID: 82104916444015582, guid: de45f7fdbd0a7414db3f64416bac0905,
+        type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 243004041666541406, guid: aed610aa752854818af5326ed486d3b7,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de45f7fdbd0a7414db3f64416bac0905, type: 2}
   m_IsPrefabParent: 0
@@ -1411,6 +1435,16 @@ Prefab:
         type: 2}
       propertyPath: MaxLandingSpeed
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82612440499671962, guid: 780d9ea38c58fec41ba4c8067f980c6b,
+        type: 2}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82612440499671962, guid: 780d9ea38c58fec41ba4c8067f980c6b,
+        type: 2}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 780d9ea38c58fec41ba4c8067f980c6b, type: 2}
@@ -6175,6 +6209,10 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1481690627}
+    - target: {fileID: 4253587194266744, guid: 258cb7847e8a9954898066941086c3e7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 148
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 258cb7847e8a9954898066941086c3e7, type: 2}
   m_IsPrefabParent: 0
