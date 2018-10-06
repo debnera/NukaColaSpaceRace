@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
     public Text cargoText;
     public Text livesText;
-    public Text fuelText;
+    public Text floatingText;
     public int livesLeft;
     int playerScore;
     int cargoCollected;
@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
+        HideFloatingText();
         //DontDestroyOnLoad(gameObject);
     }
 
@@ -90,5 +91,30 @@ public class GameManager : MonoBehaviour
     int CountRemainingCargo()
     {
         return FindObjectsOfType<Payload>().Length;
+    }
+
+    public void DisplayFloatingText(String text, float duration)
+    {
+        CancelInvoke("HideFloatingText");
+        floatingText.text = text;
+        //Invoke("HideFloatingText", duration);
+        StartCoroutine(FadeFloatingText(duration));
+    }
+
+    void HideFloatingText()
+    {
+        floatingText.text = "";
+    }
+
+    public IEnumerator FadeFloatingText(float t)
+    {
+        var color = floatingText.color;
+        color.a = 1;
+        while (color.a > 0.0f)
+        {
+            color.a -= (Time.deltaTime / t);
+            floatingText.color = color;
+            yield return null;
+        }
     }
 }

@@ -93,6 +93,7 @@ public class EnemyShip : MonoBehaviour
         RaycastHit hit;
         int layerMask = ~LayerMask.NameToLayer("Enemy"); // Ignore collisions with enemies
         Debug.DrawRay(transform.position, GetVectorToPlayer() * detectionRange, Color.yellow);
+        Debug.DrawRay(transform.position, GetShootingQuaternion().eulerAngles * detectionRange, Color.yellow);
         if (Physics.Raycast(transform.position, GetVectorToPlayer(), out hit, detectionRange, layerMask))
         {
             return hit.collider.gameObject == player;
@@ -102,13 +103,17 @@ public class EnemyShip : MonoBehaviour
 
     Vector3 GetVectorToPlayer()
     {
-        return ((player.GetComponent<Rigidbody>().centerOfMass + player.transform.position) - transform.position).normalized;
+        var playerPos = player.transform.TransformVector(player.GetComponent<Rigidbody>().centerOfMass) +
+                        player.transform.position;
+        return (playerPos - transform.position).normalized;
     }
 
     Quaternion GetShootingQuaternion()
     {
         Vector3 dir = GetVectorToPlayer();
         var angle = Vector3.Angle(transform.up, dir);
+        if (dir.x > 0)
+            angle = -angle;
         angle += Random.Range(-maxInaccuracyAngle, maxInaccuracyAngle);
         return Quaternion.Euler(0, 0, angle);
     }
@@ -135,6 +140,7 @@ public class EnemyShip : MonoBehaviour
         FlyingSource.Stop();
         DestroyedSource.Play();
         FindObjectOfType<GameManager>().AddToScore(reward);
+        FindObjectOfType<GameManager>().DisplayFloatingText("UFO destroyed! \n+" + reward.ToString(), 2f);
         Destroy(gameObject, SecondsVisibleAfterDeath);
         JettisonAttachedPart(gameObject);
     }
