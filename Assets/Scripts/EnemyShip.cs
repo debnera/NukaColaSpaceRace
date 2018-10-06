@@ -135,6 +135,7 @@ public class EnemyShip : MonoBehaviour
         FlyingSource.Stop();
         DestroyedSource.Play();
         FindObjectOfType<GameManager>().AddToScore(reward);
+        FindObjectOfType<GameManager>().DisplayFloatingText("UFO destroyed! \n+" + reward.ToString(), 2f);
         Destroy(gameObject, SecondsVisibleAfterDeath);
         JettisonAttachedPart(gameObject);
     }

@@ -184,6 +184,7 @@ public class SpaceShip : MonoBehaviour {
         //package.SetActive(false);
         //Destroy(package);
         RightPackage = npackage;
+        FindObjectOfType<GameManager>().DisplayFloatingText("Payload attached!", 2f);
     }
 
     public void AttachLeftPackage(GameObject package )
@@ -198,6 +199,7 @@ public class SpaceShip : MonoBehaviour {
         //package.SetActive(false);
         //Destroy(package);
         LeftPackage = npackage;
+        FindObjectOfType<GameManager>().DisplayFloatingText("Payload attached!", 2f);
     }
 
     private bool IsLandingVelocityOk() {
@@ -269,10 +271,12 @@ public class SpaceShip : MonoBehaviour {
         if ( other.gameObject.GetComponent<HomePlatform>() && IsLanded ) {
             //Debug.Log( "Landing OK" );
 
+            int totalScore = 0;
             if (LeftPackage)
             {
                 cargoSound.Play();
                 int score = LeftPackage.GetComponent<Payload>().reward;
+                totalScore += score;
                 gameManager.CollectCargo();
                 gameManager.AddToScore(score);
                 Destroy(LeftPackage);
@@ -282,10 +286,15 @@ public class SpaceShip : MonoBehaviour {
             {
                 cargoSound.Play();
                 int score = RightPackage.GetComponent<Payload>().reward;
+                totalScore += score;
                 gameManager.CollectCargo();
                 gameManager.AddToScore(score);
                 Destroy(RightPackage);
                 RightPackage = null;
+            }
+            if (totalScore > 0)
+            {
+                FindObjectOfType<GameManager>().DisplayFloatingText("Payload collected! \n+" + totalScore.ToString(), 2f);
             }
         }
     }
@@ -352,5 +361,6 @@ public class SpaceShip : MonoBehaviour {
         var collider = obj.GetComponent<Collider>();
         if (collider)
             collider.isTrigger = false;
+        obj.transform.parent = null;
     }
 }
