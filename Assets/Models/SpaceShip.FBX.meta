@@ -11,28 +11,99 @@ ModelImporter:
     100006: Weapon
     100008: Winglet_Nozzles
     100010: Winglets
+    100012: Rocket_Section_1
+    100014: Rocket_Section_2
+    100016: Winglet_L1
+    100018: Winglet_L2
+    100020: Winglet_Nozzle_L1
+    100022: Winglet_Nozzle_L2
+    100024: Winglet_Nozzle_Pod_L1
+    100026: Winglet_Nozzle_Pod_L2
+    100028: Winglet_Nozzle_Pod_R1
+    100030: Winglet_Nozzle_Pod_R2
+    100032: Winglet_Nozzle_R1
+    100034: Winglet_Nozzle_R2
+    100036: Winglet_R1
+    100038: Winglet_R2
     400000: MainBooster
     400002: Rocket
     400004: //RootNode
     400006: Weapon
     400008: Winglet_Nozzles
     400010: Winglets
+    400012: Rocket_Section_1
+    400014: Rocket_Section_2
+    400016: Winglet_L1
+    400018: Winglet_L2
+    400020: Winglet_Nozzle_L1
+    400022: Winglet_Nozzle_L2
+    400024: Winglet_Nozzle_Pod_L1
+    400026: Winglet_Nozzle_Pod_L2
+    400028: Winglet_Nozzle_Pod_R1
+    400030: Winglet_Nozzle_Pod_R2
+    400032: Winglet_Nozzle_R1
+    400034: Winglet_Nozzle_R2
+    400036: Winglet_R1
+    400038: Winglet_R2
     2100000: No Name
+    2100002: 'Material #2'
     2300000: MainBooster
     2300002: Rocket
     2300004: Weapon
     2300006: Winglet_Nozzles
     2300008: Winglets
+    2300010: Rocket_Section_1
+    2300012: Rocket_Section_2
+    2300014: Winglet_L1
+    2300016: Winglet_L2
+    2300018: Winglet_Nozzle_L1
+    2300020: Winglet_Nozzle_L2
+    2300022: Winglet_Nozzle_Pod_L1
+    2300024: Winglet_Nozzle_Pod_L2
+    2300026: Winglet_Nozzle_Pod_R1
+    2300028: Winglet_Nozzle_Pod_R2
+    2300030: Winglet_Nozzle_R1
+    2300032: Winglet_Nozzle_R2
+    2300034: Winglet_R1
+    2300036: Winglet_R2
     3300000: MainBooster
     3300002: Rocket
     3300004: Weapon
     3300006: Winglet_Nozzles
     3300008: Winglets
+    3300010: Rocket_Section_1
+    3300012: Rocket_Section_2
+    3300014: Winglet_L1
+    3300016: Winglet_L2
+    3300018: Winglet_Nozzle_L1
+    3300020: Winglet_Nozzle_L2
+    3300022: Winglet_Nozzle_Pod_L1
+    3300024: Winglet_Nozzle_Pod_L2
+    3300026: Winglet_Nozzle_Pod_R1
+    3300028: Winglet_Nozzle_Pod_R2
+    3300030: Winglet_Nozzle_R1
+    3300032: Winglet_Nozzle_R2
+    3300034: Winglet_R1
+    3300036: Winglet_R2
     4300000: Rocket
     4300002: Weapon
     4300004: MainBooster
     4300006: Winglets
     4300008: Winglet_Nozzles
+    4300010: Rocket_Section_2
+    4300012: Winglet_R1
+    4300014: Winglet_Nozzle_R1
+    4300016: Winglet_Nozzle_L2
+    4300018: Winglet_Nozzle_R2
+    4300020: Winglet_Nozzle_L1
+    4300022: Winglet_L2
+    4300024: Winglet_R2
+    4300026: Winglet_L1
+    4300028: Winglet_Nozzle_Pod_L2
+    4300030: Winglet_Nozzle_Pod_L1
+    4300032: Winglet_Nozzle_Pod_R1
+    4300034: Winglet_Nozzle_Pod_R2
+    4300036: Rocket_Section_1
   externalObjects: {}
   materials:
     importMaterials: 1
