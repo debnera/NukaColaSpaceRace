@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2084107299}
-  m_IndirectSpecularColor: {r: 0.040773503, g: 0.024923071, b: 0.148996, a: 1}
+  m_IndirectSpecularColor: {r: 0.040773526, g: 0.024923144, b: 0.14899603, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3426,7 +3426,18 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 82991677035103772, guid: e7fd1a298bdd7fd4d93a9eec0fdae062,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 82991677035103772, guid: e7fd1a298bdd7fd4d93a9eec0fdae062,
+        type: 2}
+      propertyPath: BypassReverbZones
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 82509000668669742, guid: e7fd1a298bdd7fd4d93a9eec0fdae062, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: e7fd1a298bdd7fd4d93a9eec0fdae062, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1389546663

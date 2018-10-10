@@ -1891,8 +1891,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79aaf12238527451fafc6fb535cd8157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crashSoft: {fileID: 8300000, guid: aea817653f7d24078bb15de9dc019a8d, type: 3}
-  crashHard: {fileID: 8300000, guid: a79de711afbe84b44a19d38e630c7245, type: 3}
+  crashSoft: {fileID: 8300000, guid: a79de711afbe84b44a19d38e630c7245, type: 3}
+  crashHard: {fileID: 8300000, guid: aea817653f7d24078bb15de9dc019a8d, type: 3}
+  crashMed: {fileID: 8300000, guid: 173b3f09d7f1c4819987f8675a5db9bb, type: 3}
 --- !u!114 &114948005522040592
 MonoBehaviour:
   m_ObjectHideFlags: 1
