@@ -176,6 +176,7 @@ public class SpaceShip : MonoBehaviour {
     public void AttachRightPackage( GameObject package ) {
         if (RightPackage != null) return;
         cargoSound.Play();
+        gameManager.OnCargoAttach();
         var hpoint = GameObject.Find("HardPoint_Right");
         
         var npackage = Instantiate(package, hpoint.transform);
@@ -192,6 +193,7 @@ public class SpaceShip : MonoBehaviour {
     {
         if (LeftPackage != null) return;
         cargoSound.Play();
+        gameManager.OnCargoAttach();
         var hpoint = GameObject.Find("HardPoint_Left");
         var npackage = Instantiate(package, hpoint.transform);
         npackage.transform.localPosition = Vector3.zero;
