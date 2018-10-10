@@ -166,7 +166,7 @@ public class GameManager : MonoBehaviour
     {
         ShowRandomSpeechBubble(payloadCollectedTextList);
         cargoCollected += 1;
-        if (CountRemainingCargo() == 0)
+        if (cargoCollected == cargoTotal)
             CompleteMission();
     }
 
