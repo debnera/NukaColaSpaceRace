@@ -6,27 +6,45 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 
     public GameObject player;       //Public variable to store a reference to the player game object
+    private GameObject followedShip;
     public float VelocityOffsetMultiplier = 0f;
     public float MinVelocity = 10f;
     public float ZoomSpeed = 100f;
-
 
     private Vector3 offset;         //Private variable to store the offset distance between the player and camera
     private Rigidbody playerRigidbody;
     private float currentZoom;
 
+    private void Awake()
+    {
+        followedShip = player;
+    }
     // Use this for initialization
     void Start()
     {
         //Calculate and store the offset value by getting the distance between the player's position and camera's position.
 //        offset = transform.position - player.transform.position;
-        offset = transform.position - GetPlayerPosition();
+        offset = transform.position - GetShipPosition();
         playerRigidbody = player.GetComponent<Rigidbody>();
+
     }
 
-    Vector3 GetPlayerPosition()
+    public void FollowPlayer() {
+        followedShip = player;
+    }
+
+    public void FollowGameObject( GameObject objectToFollow )
     {
-        return player.transform.position + player.transform.TransformVector(player.GetComponent<Rigidbody>().centerOfMass);
+        followedShip = objectToFollow;
+    }
+
+    Vector3 GetShipPosition()
+    {
+        if (followedShip == player)
+            return followedShip.transform.position + followedShip.transform.TransformVector(followedShip.GetComponent<Rigidbody>().centerOfMass);
+        else
+            return followedShip.transform.position;
+
     }
 
     // LateUpdate is called after Update each frame
@@ -40,6 +58,6 @@ public class CameraController : MonoBehaviour {
             currentZoom = Mathf.Min(currentZoom + ZoomSpeed * Time.deltaTime, targetZoom);
         else if (currentZoom > targetZoom)
             currentZoom = Mathf.Max(currentZoom - ZoomSpeed * Time.deltaTime, targetZoom);
-        transform.position = GetPlayerPosition() + offset + zoomDirection * currentZoom;
+        transform.position = GetShipPosition() + offset + zoomDirection * currentZoom;
     }
 }
