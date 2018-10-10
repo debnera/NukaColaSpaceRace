@@ -32,9 +32,8 @@ public class GameManager : MonoBehaviour
     public Text endTimeText;
     public Text endScoreText;
     public Text endUfoText;
-    public Text endMessage;
-    public String missionFailedText;
-    public String missionSuccesfullText;
+    public Text missionFailedText;
+    public Text missionSuccesfullText;
 
     private float endTime;
 
@@ -119,16 +118,23 @@ public class GameManager : MonoBehaviour
     void FailMission()
     {
         Debug.Log("Mission failed!");
-        if (endMessage)
-            endMessage.text = missionFailedText;
+        if (missionFailedText && missionSuccesfullText)
+        {
+            missionFailedText.enabled = true;
+            missionSuccesfullText.enabled = false;
+        }
         DisplayEndScreen();
     }
 
     void CompleteMission()
     {
         Debug.Log("Mission complete!");
-        if (endMessage) 
-            endMessage.text = missionSuccesfullText;
+        if (missionFailedText && missionSuccesfullText)
+        {
+            missionFailedText.enabled = false;
+            missionSuccesfullText.enabled = true;
+        }
+            
         DisplayEndScreen();
     }
 
