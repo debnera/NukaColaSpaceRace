@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
 
     public void HideSpeechBubble()
     {
+        if (!speechBubble) return;
         speechBubble.active = false;
         foreach (var text in startTextList)
         {
@@ -64,10 +65,15 @@ public class GameManager : MonoBehaviour
 
     public void ShowRandomSpeechBubble(List<Text> texts)
     {
+        if (!speechBubble) return;
         HideSpeechBubble();
         speechBubble.active = true;
-        var index = UnityEngine.Random.Range (1,(texts.Count - 1));
-        texts[index].enabled = true;
+        if (texts.Count > 0)
+        {
+            var index = UnityEngine.Random.Range (0,(texts.Count - 1));
+            texts[index].enabled = true;
+        }
+        Invoke("HideSpeechBubble", speechBubbleDuration);
     }
 
     void Awake()
@@ -97,7 +103,7 @@ public class GameManager : MonoBehaviour
 	        Debug.Log("Tutorial disabled!");
 	        OnPlayerReset(); // Show speech bubble
 	    }
-	    if (!scoreScreenVisible)
+	    if (!scoreScreen.active)
 	        UpdateUI();
 	    else if (Input.anyKey && Time.time - endTime > 2) // Reload scene on button press, if atleast n seconds has passed
 	        Application.LoadLevel(Application.loadedLevel);
@@ -126,9 +132,7 @@ public class GameManager : MonoBehaviour
 
     public void OnPlayerReset()
     {
-        HideSpeechBubble();
         ShowRandomSpeechBubble(startTextList);
-        Invoke("HideSpeechBubble", speechBubbleDuration);
     }
 
     public void ReducePlayerLives()
