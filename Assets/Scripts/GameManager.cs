@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
 
     public void ShowRandomSpeechBubble(List<Text> texts)
     {
-        if (!speechBubble) return;
+        if (!speechBubble || texts == null) return;
         HideSpeechBubble();
         speechBubble.active = true;
         if (texts.Count > 0)
