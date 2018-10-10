@@ -35,6 +35,11 @@ public class GameManager : MonoBehaviour
     public Text missionFailedText;
     public Text missionSuccesfullText;
 
+    public GameObject speechBubble;
+    public float speechBubbleDuration = 3f;
+    public List<Text> startTextList;
+    public List<Text> deathTextList;
+
     private float endTime;
 
 
@@ -42,6 +47,27 @@ public class GameManager : MonoBehaviour
     {
         if (instance) return instance;
         return new GameObject().AddComponent<GameManager>();
+    }
+
+    public void HideSpeechBubble()
+    {
+        speechBubble.active = false;
+        foreach (var text in startTextList)
+        {
+            text.enabled = false;
+        }
+        foreach (var text in deathTextList)
+        {
+            text.enabled = false;
+        }
+    }
+
+    public void ShowRandomSpeechBubble(List<Text> texts)
+    {
+        HideSpeechBubble();
+        speechBubble.active = true;
+        var index = UnityEngine.Random.Range (1,(texts.Count - 1));
+        texts[index].enabled = true;
     }
 
     void Awake()
@@ -69,6 +95,7 @@ public class GameManager : MonoBehaviour
 	        tutorialScreenVisible = false;
 	        tutorialScreen.active = false;
 	        Debug.Log("Tutorial disabled!");
+	        OnPlayerReset(); // Show speech bubble
 	    }
 	    if (!scoreScreenVisible)
 	        UpdateUI();
@@ -97,8 +124,16 @@ public class GameManager : MonoBehaviour
         ufoDestroyed += 1;
     }
 
+    public void OnPlayerReset()
+    {
+        HideSpeechBubble();
+        ShowRandomSpeechBubble(startTextList);
+        Invoke("HideSpeechBubble", speechBubbleDuration);
+    }
+
     public void ReducePlayerLives()
     {
+        ShowRandomSpeechBubble(deathTextList);
         livesLeft -= 1;
         if (livesLeft < 0)
         {
