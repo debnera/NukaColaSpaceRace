@@ -63,6 +63,14 @@ public class GameManager : MonoBehaviour
         {
             text.enabled = false;
         }
+        foreach (var text in payloadAttachedTextList)
+        {
+            text.enabled = false;
+        }
+        foreach (var text in payloadCollectedTextList)
+        {
+            text.enabled = false;
+        }
     }
 
     public void ShowRandomSpeechBubble(List<Text> texts)
