@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
     public float speechBubbleDuration = 3f;
     public List<Text> startTextList;
     public List<Text> deathTextList;
+    public List<Text> payloadAttachedTextList;
+    public List<Text> payloadCollectedTextList;
 
     private float endTime;
 
@@ -147,8 +149,14 @@ public class GameManager : MonoBehaviour
             
     }
 
+    public void OnCargoAttach()
+    {
+        ShowRandomSpeechBubble(payloadAttachedTextList);
+    }
+
     public void CollectCargo()
     {
+        ShowRandomSpeechBubble(payloadCollectedTextList);
         cargoCollected += 1;
         if (CountRemainingCargo() == 0)
             CompleteMission();
