@@ -7,16 +7,36 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
+
+    public GameObject tutorialScreen;
+    public bool tutorialScreenVisible = true;
+    
+   
+    
     public Text timeText;
     public Text scoreText;
     public Text cargoText;
     public Text livesText;
     public Text floatingText;
     public int livesLeft;
+    private int ufoDestroyed;
     int playerScore;
     int cargoCollected;
     int cargoTotal;
     DateTime startTime;
+    
+    public GameObject scoreScreen;
+    public bool scoreScreenVisible = false;
+    
+    public Text endCargoText;
+    public Text endTimeText;
+    public Text endScoreText;
+    public Text endUfoText;
+    public Text endMessage;
+    public String missionFailedText;
+    public String missionSuccesfullText;
+
+    private float endTime;
 
 
     public static GameManager GetInstance()
@@ -30,6 +50,8 @@ public class GameManager : MonoBehaviour
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
         HideFloatingText();
+        tutorialScreen.active = tutorialScreenVisible;
+        scoreScreen.active = false;
         //DontDestroyOnLoad(gameObject);
     }
 
@@ -43,7 +65,16 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	    UpdateUI();
+	    if (tutorialScreenVisible && Input.anyKey)
+	    {
+	        tutorialScreenVisible = false;
+	        tutorialScreen.active = false;
+	        Debug.Log("Tutorial disabled!");
+	    }
+	    if (!scoreScreenVisible)
+	        UpdateUI();
+	    else if (Input.anyKey && Time.time - endTime > 2) // Reload scene on button press, if atleast n seconds has passed
+	        Application.LoadLevel(Application.loadedLevel);
 
 	}
 
@@ -62,11 +93,20 @@ public class GameManager : MonoBehaviour
         playerScore += score;
     }
 
+    public void IncrementUfoCounter()
+    {
+        ufoDestroyed += 1;
+    }
+
     public void ReducePlayerLives()
     {
         livesLeft -= 1;
-        if (livesLeft <= 0)
+        if (livesLeft < 0)
+        {
+            livesLeft = 0;
             FailMission();
+        }
+            
     }
 
     public void CollectCargo()
@@ -78,14 +118,35 @@ public class GameManager : MonoBehaviour
 
     void FailMission()
     {
-        // Implement me
         Debug.Log("Mission failed!");
+        if (endMessage)
+            endMessage.text = missionFailedText;
+        DisplayEndScreen();
     }
 
     void CompleteMission()
     {
-        // Implement me
         Debug.Log("Mission complete!");
+        if (endMessage) 
+            endMessage.text = missionSuccesfullText;
+        DisplayEndScreen();
+    }
+
+    void DisplayEndScreen()
+    {
+        scoreScreenVisible = true;
+        endTime = Time.time;
+        scoreScreen.active = true;
+        endScoreText.text = playerScore.ToString();
+        endUfoText.text = ufoDestroyed.ToString();
+        endCargoText.text = string.Format("{0} / {1}", cargoCollected, cargoTotal);
+        var time = DateTime.Now - startTime;
+        endTimeText.text = string.Format("{0:00}:{1:00}", time.Minutes, time.Seconds);
+        var player = FindObjectOfType<SpaceShip>();
+        if (player)
+        {
+            player.gameObject.active = false;
+        }
     }
 
     int CountRemainingCargo()
