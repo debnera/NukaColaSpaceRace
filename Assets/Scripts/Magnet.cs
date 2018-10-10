@@ -57,24 +57,39 @@ public class Magnet : MonoBehaviour
     {
         // Periodically toggles the magnet on/off 
         active = !active;
+        
         if (active)
         {
+            SetParticleSystems(true);
             magnetSound.Play();
-            GetComponent<MeshRenderer>().material.color = Color.green;
+            //GetComponent<MeshRenderer>().material.color = Color.green;
             SetVisualizerColor(Color.green);
             Invoke("Toggle", timeOn);
         }
         else
         {
+            SetParticleSystems(false);
             magnetSound.Stop();
-            GetComponent<MeshRenderer>().material.color = Color.gray;
+            //GetComponent<MeshRenderer>().material.color = Color.gray;
             SetVisualizerColor(Color.gray);
             Invoke("Toggle", timeOff);
         }
     }
 
+    void SetParticleSystems(bool enabled)
+    {
+        var pSystems = GetComponentsInChildren<ParticleSystem>();
+        foreach (var sys in pSystems)
+        {
+            if (enabled) sys.Play();
+            else sys.Stop();
+        }
+    }
+
     void AddVisualization()
     {
+        
+        
         // Add a transparent sphere for visualizing the radius (Used for debugging / level design)
         visualizer = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         visualizer.transform.position = transform.position;
@@ -92,6 +107,8 @@ public class Magnet : MonoBehaviour
 
     void SetVisualizerColor(Color color)
     {
+        if (!visualizeRadius) return;
+        
         color.a = 0.1f; // Make the color transparent
         visualizer.GetComponent<MeshRenderer>().material.color = color;
     }
