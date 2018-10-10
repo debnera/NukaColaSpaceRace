@@ -88,6 +88,7 @@ public class SpaceShip : MonoBehaviour {
         CancelInvoke("ResetPosition"); // Avoid resetting multiple times
         IsLanded = false;
         IsAlive = true;
+        gameManager.OnPlayerReset();
 
         if (LeftPackage)
         {
