@@ -6,6 +6,8 @@ using UnityEngine;
 public class SpaceShip : MonoBehaviour {
 
     public GameObject ship;
+    public GameObject DeathShip;
+    private GameObject deathShip;
     public float PayloadForceMultiplier = 0.3f;
     public float PayloadTorqueOffset = 1f;
     public float SecondsToRestartAfterDeath = 3f;
@@ -106,6 +108,12 @@ public class SpaceShip : MonoBehaviour {
         transform.rotation = initialRotation;
         rigidBody.angularVelocity = new Vector3( );
         rigidBody.velocity = new Vector3( );
+
+        CameraController cam = (CameraController)FindObjectOfType<Camera>().GetComponent(typeof(CameraController));
+        cam.FollowPlayer();
+        if (deathShip != null)
+            Destroy(deathShip);
+        Show();
     }
 
 	// Update is called once per frame
@@ -338,12 +346,58 @@ public class SpaceShip : MonoBehaviour {
         if (shields <= 0 && IsAlive) Die();
     }
 
+    void SpawnDeathShip() {
+        deathShip = Instantiate(DeathShip);
+        deathShip.SetActive(true);
+        deathShip.transform.rotation = transform.rotation;
+        deathShip.transform.position = transform.position;
+        var rigidBodies = deathShip.GetComponents<Rigidbody>();
+
+        foreach (Rigidbody rbody in rigidBodies)
+        {
+            rbody.velocity = GetComponent<Rigidbody>().velocity;
+        }
+    }
+
+    void Hide() {
+        var renders = gameObject.GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer render in renders)
+        {
+            render.enabled = false;
+        }
+
+        var colliders = GetComponents<Collider>();
+        foreach (Collider col in colliders)
+        {
+            col.enabled = false;
+        }
+    }
+
+    void Show() {
+        var renders = gameObject.GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer render in renders)
+        {
+            render.enabled = true;
+        }
+
+        var colliders = GetComponents<Collider>();
+        foreach (Collider col in colliders)
+        {
+            col.enabled = true;
+        }
+    }
+
     void Die()
     {
         IsAlive = false;
         gameManager.ReducePlayerLives();
         Invoke("ResetPosition", SecondsToRestartAfterDeath);
-        // TODO: Play death animation
+        Hide();
+        SpawnDeathShip();
+        CameraController cam = (CameraController)FindObjectOfType<Camera>().GetComponent(typeof(CameraController));
+        var pieceOfDeathShip = deathShip.gameObject.transform.Find("Rocket_Section_2").gameObject;
+        cam.FollowGameObject( pieceOfDeathShip );
+
         destroyedSound.Play();
 
         if (LeftPackage)
