@@ -36,7 +36,6 @@ public class SpaceShip : MonoBehaviour {
     [SerializeField] GameObject cannon;
     [SerializeField] ParticleSystem EngineEffect;
 
-    Vector3 eulerAngleVelocity;
     Vector3 initialPosition;
     Quaternion initialRotation;
 
@@ -51,7 +50,6 @@ public class SpaceShip : MonoBehaviour {
     GameObject LeftPackage = null;
     GameObject RightPackage = null;
 
-    private float originalMass;
     private float landingSoundPreviousPlay;
 
     private GameManager gameManager;
@@ -61,7 +59,6 @@ public class SpaceShip : MonoBehaviour {
     {
         initialPosition = transform.position;
         initialRotation = transform.rotation;
-        originalMass = GetComponent<Rigidbody>().mass;
         
 //        RightJoint = gameObject.AddComponent<FixedJoint>();
 //        LeftJoint = gameObject.AddComponent<FixedJoint>();
@@ -70,7 +67,6 @@ public class SpaceShip : MonoBehaviour {
     
     void Start ( ) {
         rigidBody = GetComponent<Rigidbody>( );
-        eulerAngleVelocity = new Vector3( 0, 0, RotationSpeed);
         
         previousShotTime = Time.time;
         gameManager = GameManager.GetInstance();

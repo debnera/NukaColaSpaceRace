@@ -7,7 +7,6 @@ public class Boom : MonoBehaviour {
     public ParticleSystem destructionEffect;
 
     private Vector3 offset;
-    ParticleSystem explosion;
     bool firstExplosion = true;
 
     // Use this for initialization
@@ -20,7 +19,7 @@ public class Boom : MonoBehaviour {
         if (!firstExplosion) return;
 
         firstExplosion = false;
-        explosion = Instantiate(destructionEffect, transform);
+        Instantiate(destructionEffect, transform);
         destructionEffect.Play();
     }
 
@@ -28,12 +27,4 @@ public class Boom : MonoBehaviour {
     void FixedUpdate () {
 
     }
-
-    /*
-    private void OnDestroy()
-    {
-        if (explosion != null)
-            Destroy(explosion);
-    }
-    */
 }

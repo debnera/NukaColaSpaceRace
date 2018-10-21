@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -10,9 +11,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject tutorialScreen;
     public bool tutorialScreenVisible = true;
-    
-   
-    
+
     public Text timeText;
     public Text scoreText;
     public Text cargoText;
@@ -54,7 +53,7 @@ public class GameManager : MonoBehaviour
     public void HideSpeechBubble()
     {
         if (!speechBubble) return;
-        speechBubble.active = false;
+        speechBubble.SetActive(false);
         foreach (var text in startTextList)
         {
             text.enabled = false;
@@ -77,7 +76,7 @@ public class GameManager : MonoBehaviour
     {
         if (!speechBubble || texts == null) return;
         HideSpeechBubble();
-        speechBubble.active = true;
+        speechBubble.SetActive(true);
         if (texts.Count > 0)
         {
             var index = UnityEngine.Random.Range (0,(texts.Count - 1));
@@ -91,8 +90,8 @@ public class GameManager : MonoBehaviour
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
         HideFloatingText();
-        tutorialScreen.active = tutorialScreenVisible;
-        scoreScreen.active = false;
+        tutorialScreen.SetActive(tutorialScreenVisible);
+        scoreScreen.SetActive(false);
         //DontDestroyOnLoad(gameObject);
     }
 
@@ -109,16 +108,15 @@ public class GameManager : MonoBehaviour
 	    if (tutorialScreenVisible && Input.anyKey)
 	    {
 	        tutorialScreenVisible = false;
-	        tutorialScreen.active = false;
+	        tutorialScreen.SetActive(false);
 	        Debug.Log("Tutorial disabled!");
 	        OnPlayerReset(); // Show speech bubble
 	    }
-	    if (!scoreScreen.active)
+	    if (!scoreScreen.activeInHierarchy)
 	        UpdateUI();
 	    else if (Input.anyKey && Time.time - endTime > 2) // Reload scene on button press, if atleast n seconds has passed
-	        Application.LoadLevel(Application.loadedLevel);
-
-	}
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+    }
 
     void UpdateUI()
     {
@@ -189,7 +187,7 @@ public class GameManager : MonoBehaviour
             missionFailedText.enabled = false;
             missionSuccesfullText.enabled = true;
         }
-            
+
         DisplayEndScreen();
     }
 
@@ -197,7 +195,7 @@ public class GameManager : MonoBehaviour
     {
         scoreScreenVisible = true;
         endTime = Time.time;
-        scoreScreen.active = true;
+        scoreScreen.SetActive(true);
         endScoreText.text = playerScore.ToString();
         endUfoText.text = ufoDestroyed.ToString();
         endCargoText.text = string.Format("{0} / {1}", cargoCollected, cargoTotal);
@@ -206,7 +204,7 @@ public class GameManager : MonoBehaviour
         var player = FindObjectOfType<SpaceShip>();
         if (player)
         {
-            player.gameObject.active = false;
+            player.gameObject.SetActive(false);
         }
     }
 
